@@ -18,7 +18,11 @@ public class ProJDBCDAO implements ProDAO_interface{
 
 				Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
 		        PreparedStatement ps = con.prepareStatement(INSERT_INTO_DATA);
-		        ps.setString(1, );
+		        ps.setString(1,proVO.getPro_classid());
+		        ps.setString(2, proVO.getPro_name());
+		        ps.setDate(3, proVO.getPro_pic());
+		        
+		        
 		        
 		    } catch (SQLException | ClassNotFoundException e) {
 				// TODO Auto-generated catch block

@@ -2,7 +2,6 @@ package com.product.model;
 import java.sql.Date;
 
 public class ProVO implements java.io.Serializable{
-	private String pro_no;
 	private String pro_classid;
 	private String pro_name;
 	private Date   pro_pic;
@@ -15,12 +14,7 @@ public class ProVO implements java.io.Serializable{
 	private String pro_shelve;
 	private Integer pro_all_assess;
 	private Integer pro_all_assessman;
-	public String getPro_no() {
-		return pro_no;
-	}
-	public void setPro_no(String pro_no) {
-		this.pro_no = pro_no;
-	}
+	
 	public String getPro_classid() {
 		return pro_classid;
 	}
