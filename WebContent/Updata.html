@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=Big5">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<title>Data output</title>
+</head>
+<body>
+    <form action="Updata.do" method = post enctype="multipart/form-data">
+        <input type="file" name="upfile" id="fileup">
+        <input type="file" name="upfile" id="fileup">
+        <input type="submit" value="送出上傳"><br>
+        <hr>    
+        <img id="blah" src="#"  />
+    </form>
+    
+    <form action="Updata.do" method = get enctype="multipart/form-data">
+        <input type="checkbox" name="name1" value="123">
+        <input type="submit" value="刪除"><br>
+    </form>
+    
+    <script type="text/javascript">
+        function readURL(input){
+        	if(input.files && input.files[0]){
+        		var reader = new FileReader();
+        		reader.onload = function(e){
+        			$("#blah").attr('src',e.target.result);
+        		}
+        		reader.readAsDataURL(input.files[0]);
+        	}
+        }
+        $("#fileup").change(function(){
+        	readURL(this);
+        })
+    </script>
+
+</body>
+</html>
