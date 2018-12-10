@@ -9,8 +9,8 @@ public class ProJDBCDAO implements ProDAO_interface{
 	private static final String USER = "test";
 	private static final String PASSWORD = "123456";
 	private static final String INSERT_INTO_DATA = "Insert into PRODUCT (PRO_NO,PRO_CLASSID,PRO_NAME,PRO_PIC,PRO_PIC_EXT,PRO_FORMAT,PRO_BONUS,PRO_STOCK,PRO_SAFESTOCK,PRO_DETAILS,PRO_SHELVE,PRO_ALL_ASSESS,PRO_ALL_ASSESSMAN) values ('PR'||LPAD(to_char(PRODUCT_SEQ.NEXTVAL), 3, '0'),?,?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String INSERT_UPDATE = "UPDATE PRODUCT SET  PRO_CLASSID = ?, PRO_NAME = ?, PRO_PIC = ?, PRO_PIC_EXT = ?, PRO_FORMAT = ?, PRO_BONUS = ?, PRO_STOCK = ?, PRO_SAFESTOCK = ?, PRO_DETAILS = ?, PRO_SHELVE = ?, PRO_ALL_ASSESS = ?, PRO_ALL_ASSESSMAN = ? where PRO_NO = ?";
 	
-	private static final String INSERT_INTO_TEST = "Insert into PRODUCT (PRO_NO,PRO_CLASSID,PRO_NAME,PRO_PIC,PRO_PIC_EXT,PRO_FORMAT,PRO_BONUS,PRO_STOCK,PRO_SAFESTOCK,PRO_DETAILS,PRO_SHELVE,PRO_ALL_ASSESS,PRO_ALL_ASSESSMAN) values ('PR'||LPAD(to_char(PRODUCT_SEQ.NEXTVAL), 3, '0'),'PT001','Nikex',NULL,'PIC_EXT','9.5',2000,20,5,'DETAILS','ON',5,10);";
 	Connection con = null;
 	PreparedStatement ps = null;
 	
@@ -21,12 +21,11 @@ public class ProJDBCDAO implements ProDAO_interface{
 			    Class.forName(DRIVER);
 
 				con = DriverManager.getConnection(URL, USER, PASSWORD);
-//				Statement stmt = con.createStatement();
-//				stmt.executeUpdate(INSERT_INTO_TEST);
+				
 		        ps = con.prepareStatement(INSERT_INTO_DATA);
 		        ps.setString(1,proVO.getPro_classid());
 		        ps.setString(2, proVO.getPro_name());
-		        ps.setDate(3, proVO.getPro_pic());
+		        ps.setBytes(3, proVO.getPro_pic());
 		        ps.setString(4, proVO.getPro_pic_ext());
 		        ps.setString(5, proVO.getPro_format());
 		        ps.setInt(6, proVO.getPro_bonus());
@@ -76,7 +75,49 @@ public class ProJDBCDAO implements ProDAO_interface{
 
 	@Override
 	public void update(ProVO proVO) {
-		// TODO Auto-generated method stub
+		
+		try {
+			Class.forName(DRIVER);
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+		    ps = con.prepareStatement(INSERT_UPDATE);
+		    ps.setString(1,proVO.getPro_classid());
+	        ps.setString(2, proVO.getPro_name());
+	        ps.setBytes(3, proVO.getPro_pic());
+	        ps.setString(4, proVO.getPro_pic_ext());
+	        ps.setString(5, proVO.getPro_format());
+	        ps.setInt(6, proVO.getPro_bonus());
+            ps.setInt(7, proVO.getPro_stock());
+	        ps.setInt (8,proVO.getPro_safestock());
+	    	ps.setString (9,proVO.getPro_details());
+	    	ps.setString (10,proVO.getPro_shelve());
+	    	ps.setInt (11,proVO.getPro_all_assess());
+	    	ps.setInt (12,proVO.getPro_all_assessman());
+	    	ps.setString(13, proVO.getPro_no());
+	    	
+	    	ps.executeQuery();
+		    
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
 		
 	}
 
