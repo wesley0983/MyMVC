@@ -1,7 +1,7 @@
 package com.product.model;
 import java.sql.Date;
 
-public class ProVO implements java.io.Serializable{
+public class ProdouctVO implements java.io.Serializable{
 	private String pro_no;
 	private String pro_classid;
 	private String pro_name;

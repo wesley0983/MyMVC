@@ -6,7 +6,7 @@ public class ProMain {
 	
 	public static void main (String[]  args) {
 		
-		ProJDBCDAO proDAO = new ProJDBCDAO();
+		ProdouctJDBCDAO proDAO = new ProdouctJDBCDAO();
 /*
 		//新增
 		ProVO pro1 = new ProVO();
@@ -45,7 +45,7 @@ public class ProMain {
     	System.out.println("成功修改");
  */       
 		//單筆查詢
-    	ProVO pro3 = proDAO.findByPK("P001");
+    	ProdouctVO pro3 = proDAO.findByPK("P001");
     	System.out.println(pro3.getPro_no() + ",");
     	System.out.println(pro3.getPro_classid() + ",");
     	System.out.println(pro3.getPro_name() + ",");
@@ -62,8 +62,8 @@ public class ProMain {
     	System.out.println("-------------------------------------");
  
     	//多筆查詢
-    	List<ProVO> provolist = proDAO.getAll();
-    	for (ProVO pro4 : provolist) {
+    	List<ProdouctVO> provolist = proDAO.getAll();
+    	for (ProdouctVO pro4 : provolist) {
         	System.out.println(pro4.getPro_no() + ",");
         	System.out.println(pro4.getPro_classid() + ",");
         	System.out.println(pro4.getPro_name() + ",");
@@ -81,7 +81,7 @@ public class ProMain {
     	}
     	
     	//刪除  (雙子表格)
-//    	proDAO.delete("20181211-000001" , "PR001" ,"P001");
+    	proDAO.delete("20181211-000001" , "PR001" ,"P001");
     	
     	
 	}

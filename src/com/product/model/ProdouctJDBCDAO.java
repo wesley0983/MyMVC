@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProJDBCDAO implements ProDAO_interface{
+public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
 	private static final String USER = "test";
@@ -33,14 +33,12 @@ public class ProJDBCDAO implements ProDAO_interface{
 	
 	
 	
-	@Override
-	public void insert(ProVO proVO) {
+	@Override  //新增
+	public void insert(ProdouctVO proVO) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		
 		 try {
-			    
-
 				con = DriverManager.getConnection(URL, USER, PASSWORD);
 				
 		        ps = con.prepareStatement(INSERT_INTO_DATA);
@@ -57,7 +55,7 @@ public class ProJDBCDAO implements ProDAO_interface{
 		    	ps.setInt (11,proVO.getPro_all_assess());
 		    	ps.setInt (12,proVO.getPro_all_assessman());
 		        
-		        ps.executeQuery();
+		        ps.executeUpdate();
 		        
 		    } catch (SQLException  e) {
 				// TODO Auto-generated catch block
@@ -95,7 +93,7 @@ public class ProJDBCDAO implements ProDAO_interface{
 	}
 
 	@Override
-	public void update(ProVO proVO) {
+	public void update(ProdouctVO proVO) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		
@@ -117,7 +115,7 @@ public class ProJDBCDAO implements ProDAO_interface{
 	    	ps.setInt (12,proVO.getPro_all_assessman());
 	    	ps.setString(13, proVO.getPro_no());
 	    	
-	    	ps.executeQuery();
+	    	ps.executeUpdate();
 		    
 		} catch (  SQLException e) {
 			// TODO Auto-generated catch block
@@ -148,34 +146,39 @@ public class ProJDBCDAO implements ProDAO_interface{
 	public void delete(String ord_no ,String prom_project_id ,  String pro_no) {
 		Connection con = null;
 		PreparedStatement ps = null;
-		ResultSet rs = null;
+//		ResultSet rs = null;
 		try {
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+//			con = DriverManager.getConnection(URL, USER, PASSWORD);
+//			ps = con.prepareStatement(DELETE_CHILDREN_01);
+//			ps.setString(1,ord_no );
+//			ps.addBatch();
+//			
+//			ps = con.prepareStatement(DELETE_CHILDERN_02);
+//			ps.setString(1,prom_project_id );
+//			ps.addBatch();
+//			
+//			ps = con.prepareStatement(DELETE_DATA);
+//			ps.setString(1, pro_no);
+//			ps.addBatch();
+//			ps.executeBatch();
+			
 			ps = con.prepareStatement(DELETE_CHILDREN_01);
 			ps.setString(1,ord_no );
-			rs = ps.executeQuery();
+			ps.executeUpdate();
 	
 			ps = con.prepareStatement(DELETE_CHILDERN_02);
 			ps.setString(1,prom_project_id );
-			rs = ps.executeQuery();
+			ps.executeUpdate();
 			
 			ps = con.prepareStatement(DELETE_DATA);
 			ps.setString(1, pro_no);
-			rs = ps.executeQuery();
+			ps.executeUpdate();
 			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			if(rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
 			if(ps != null) {
 				try {
 					ps.close();
@@ -197,9 +200,9 @@ public class ProJDBCDAO implements ProDAO_interface{
 	}
 
 	@Override
-	public List<ProVO> getAll() {
-		List<ProVO> provolist = new ArrayList<>();
-		ProVO provo = null;
+	public List<ProdouctVO> getAll() {
+		List<ProdouctVO> provolist = new ArrayList<>();
+		ProdouctVO provo = null;
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -209,7 +212,7 @@ public class ProJDBCDAO implements ProDAO_interface{
 		    rs = ps.executeQuery();
 		    
 		    while(rs.next()) {
-		    	provo = new ProVO();
+		    	provo = new ProdouctVO();
 		    	provo.setPro_no(rs.getString("PRO_NO"));
 				provo.setPro_classid(rs.getString("PRO_CLASSID"));
 				provo.setPro_name(rs.getString("PRO_NAME"));
@@ -260,8 +263,8 @@ public class ProJDBCDAO implements ProDAO_interface{
 	}
 
 	@Override
-	public ProVO findByPK (String pro_no) {
-		ProVO provo = null;
+	public ProdouctVO findByPK (String pro_no) {
+		ProdouctVO provo = null;
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -275,7 +278,7 @@ public class ProJDBCDAO implements ProDAO_interface{
 			rs = ps.executeQuery();
 			
 			while (rs.next()) {
-				provo = new ProVO();
+				provo = new ProdouctVO();
 				provo.setPro_no(rs.getString("PRO_NO"));
 				provo.setPro_classid(rs.getString("PRO_CLASSID"));
 				provo.setPro_name(rs.getString("PRO_NAME"));
