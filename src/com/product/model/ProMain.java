@@ -1,10 +1,13 @@
 package com.product.model;
 
+import java.util.List;
+
 public class ProMain {
 	
 	public static void main (String[]  args) {
 		
 		ProJDBCDAO proDAO = new ProJDBCDAO();
+/*
 		//新增
 		ProVO pro1 = new ProVO();
         pro1.setPro_classid("PT001");
@@ -40,8 +43,47 @@ public class ProMain {
     	pro2.setPro_no("PR001");
     	proDAO.update(pro2);
     	System.out.println("成功修改");
-        
-		
+ */       
+		//單筆查詢
+    	ProVO pro3 = proDAO.findByPK("P001");
+    	System.out.println(pro3.getPro_no() + ",");
+    	System.out.println(pro3.getPro_classid() + ",");
+    	System.out.println(pro3.getPro_name() + ",");
+    	System.out.println(pro3.getPro_pic() + ",");
+    	System.out.println(pro3.getPro_pic_ext() + ",");
+    	System.out.println(pro3.getPro_format() + ",");
+    	System.out.println(pro3.getPro_bonus() + ",");
+    	System.out.println(pro3.getPro_stock() + ",");
+    	System.out.println(pro3.getPro_safestock() + ",");
+    	System.out.println(pro3.getPro_details() + ",");
+    	System.out.println(pro3.getPro_shelve() + ",");
+    	System.out.println(pro3.getPro_all_assess() + ",");
+    	System.out.println(pro3.getPro_all_assessman() + ",");
+    	System.out.println("-------------------------------------");
+ 
+    	//多筆查詢
+    	List<ProVO> provolist = proDAO.getAll();
+    	for (ProVO pro4 : provolist) {
+        	System.out.println(pro4.getPro_no() + ",");
+        	System.out.println(pro4.getPro_classid() + ",");
+        	System.out.println(pro4.getPro_name() + ",");
+        	System.out.println(pro4.getPro_pic() + ",");
+        	System.out.println(pro4.getPro_pic_ext() + ",");
+        	System.out.println(pro4.getPro_format() + ",");
+        	System.out.println(pro4.getPro_bonus() + ",");
+        	System.out.println(pro4.getPro_stock() + ",");
+        	System.out.println(pro4.getPro_safestock() + ",");
+        	System.out.println(pro4.getPro_details() + ",");
+        	System.out.println(pro4.getPro_shelve() + ",");
+        	System.out.println(pro4.getPro_all_assess() + ",");
+        	System.out.println(pro4.getPro_all_assessman() + ",");
+        	System.out.println("-----------------------------------");
+    	}
+    	
+    	//刪除
+    	proDAO.delete("20181211-000001" , "PR001" ,"P001");
+    	
+    	
 	}
 
 }
