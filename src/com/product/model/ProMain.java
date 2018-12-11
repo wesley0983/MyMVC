@@ -80,8 +80,8 @@ public class ProMain {
         	System.out.println("-----------------------------------");
     	}
     	
-    	//刪除
-    	proDAO.delete("20181211-000001" , "PR001" ,"P001");
+    	//刪除  (雙子表格)
+//    	proDAO.delete("20181211-000001" , "PR001" ,"P001");
     	
     	
 	}
