@@ -9,10 +9,9 @@ public class ProductClass_Main {
 		ProductClassJDBCDAO productClassDAO = new ProductClassJDBCDAO();
 		
 		//新增
-//		ProductClassVO productClassVO = new ProductClassVO();
-//		productClassVO.setPro_classid("PT003");
-//		productClassVO.setPro_classname("CLOTHING");
-//		System.out.println("成功新增" + productClassDAO.insert(productClassVO) + "筆");
+		ProductClassVO productClassVO = new ProductClassVO();
+		productClassVO.setPro_classname("CLOTHING");
+		System.out.println("成功新增" + productClassDAO.insert(productClassVO) + "筆");
 //		
 //		//修改
 //		ProductClassVO productClassVO1 = new ProductClassVO();

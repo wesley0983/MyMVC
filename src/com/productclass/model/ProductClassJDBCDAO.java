@@ -10,7 +10,7 @@ public class ProductClassJDBCDAO implements ProductClassDAO_interface{
 	private static final String USER = "test";
 	private static final String PASSWORD = "123456";
 	//新增
-	private static final String INSERT_INTO = "Insert into PRODUCTCLASS(PRO_CLASSID,PRO_CLASSNAME) values (?,?)";
+	private static final String INSERT = "Insert into PRODUCTCLASS(PRO_CLASSID,PRO_CLASSNAME) values ('PT'||LPAD(to_char(PRODUCTCLASS_SEQ.NEXTVAL), 3, '0'),?)";
 	//修改
 	private static final String UPDATE = "UPDATE PRODUCTCLASS SET PRO_CLASSNAME = ? WHERE PRO_CLASSID = ?";
 	//刪除
@@ -38,9 +38,8 @@ public class ProductClassJDBCDAO implements ProductClassDAO_interface{
 		int count = 0;
 		try {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			ps = con.prepareStatement(INSERT_INTO);
-			ps.setString(1, productClassVO.getPro_classid());
-			ps.setString(2, productClassVO.getPro_classname());
+			ps = con.prepareStatement(INSERT);
+			ps.setString(1, productClassVO.getPro_classname());
 			count = ps.executeUpdate();
 			
 			
