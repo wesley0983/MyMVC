@@ -13,7 +13,7 @@ public class PromotionJDBCDAO implements PromotionDAO_interface{
 	//新增
 	private static final String INSERT = "Insert into PROMOTION (PROM_PROJECT_ID,PROM_PROJECT_NAME,PROM_PROJECT_SDATE,PROM_PROJECT_EDATE) values ('PR'||LPAD(to_char(PROMOTION_SEQ.NEXTVAL), 3, '0'),?,?,?)";
 	//修改
-	private static final String UPDATA = "update PROMOTION SET  PROM_PROJECT_NAME = ? , PROM_PROJECT_SDATE = ? ,  PROM_PROJECT_EDATE = ? WHERE PROM_PROJECT_ID = ?";
+	private static final String UPDATE = "update PROMOTION SET  PROM_PROJECT_NAME = ? , PROM_PROJECT_SDATE = ? ,  PROM_PROJECT_EDATE = ? WHERE PROM_PROJECT_ID = ?";
 	//刪除
 	private static final String DELETE_PROM_DET = "Delete FROM PRO_DETAIL_PROM WHERE PROM_PROJECT_ID = ?";
 	private static final String DELETE_PROM = "Delete FROM PROMOTION WHERE PROM_PROJECT_ID = ?";
@@ -85,7 +85,7 @@ public class PromotionJDBCDAO implements PromotionDAO_interface{
 		PreparedStatement ps = null;
 		try {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			ps = con.prepareStatement(UPDATA);
+			ps = con.prepareStatement(UPDATE);
 			
 			ps.setString(1, promotionVO.getProm_project_name());
 			ps.setTimestamp(2, promotionVO.getProm_project_sdate());
@@ -172,7 +172,7 @@ public class PromotionJDBCDAO implements PromotionDAO_interface{
 		}
 		return count;
 	}
-
+    //單筆查詢
 	@Override
 	public PromotionVO findByPK(String prom_project_id) {
 		PromotionVO promotionVO = null;

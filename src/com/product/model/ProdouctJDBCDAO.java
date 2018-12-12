@@ -10,7 +10,7 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 	private static final String USER = "test";
 	private static final String PASSWORD = "123456";
 	//新增
-	private static final String INSERT = "Insert into PRODUCT (PRO_NO,PRO_CLASSID,PRO_NAME,PRO_PIC,PRO_PIC_EXT,PRO_FORMAT,PRO_BONUS,PRO_STOCK,PRO_SAFESTOCK,PRO_DETAILS,PRO_SHELVE,PRO_ALL_ASSESS,PRO_ALL_ASSESSMAN) values ('PR'||LPAD(to_char(PRODUCT_SEQ.NEXTVAL), 3, '0'),?,?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String INSERT = "Insert into PRODUCT (PRO_NO,PRO_CLASSID,PRO_NAME,PRO_PIC,PRO_PIC_EXT,PRO_FORMAT,PRO_BONUS,PRO_STOCK,PRO_SAFESTOCK,PRO_DETAILS,PRO_SHELVE,PRO_ALL_ASSESS,PRO_ALL_ASSESSMAN) values ('P'||LPAD(to_char(PRODUCT_SEQ.NEXTVAL), 3, '0'),?,?,?,?,?,?,?,?,?,?,?,?)";
 	//修改
 	private static final String UPDATE = "UPDATE PRODUCT SET  PRO_CLASSID = ?, PRO_NAME = ?, PRO_PIC = ?, PRO_PIC_EXT = ?, PRO_FORMAT = ?, PRO_BONUS = ?, PRO_STOCK = ?, PRO_SAFESTOCK = ?, PRO_DETAILS = ?, PRO_SHELVE = ?, PRO_ALL_ASSESS = ?, PRO_ALL_ASSESSMAN = ? where PRO_NO = ?";
 	//單筆查詢、多筆查詢
@@ -34,10 +34,10 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 	
 	
 	@Override  //新增
-	public void insert(ProdouctVO proVO) {
+	public int insert(ProdouctVO proVO) {
 		Connection con = null;
 		PreparedStatement ps = null;
-		
+		int count = 0 ;
 		 try {
 				con = DriverManager.getConnection(URL, USER, PASSWORD);
 				
@@ -55,7 +55,7 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 		    	ps.setInt (11,proVO.getPro_all_assess());
 		    	ps.setInt (12,proVO.getPro_all_assessman());
 		        
-		        ps.executeUpdate();
+		    	count = ps.executeUpdate();
 		        
 		    } catch (SQLException  e) {
 				// TODO Auto-generated catch block
@@ -87,16 +87,16 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 					}
 				}
 			}
-		
+		return count;
 		
 		
 	}
-
+    //更新
 	@Override
-	public void update(ProdouctVO proVO) {
+	public int update(ProdouctVO proVO) {
 		Connection con = null;
 		PreparedStatement ps = null;
-		
+		int count = 0;
 		try {
 			
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -115,7 +115,7 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 	    	ps.setInt (12,proVO.getPro_all_assessman());
 	    	ps.setString(13, proVO.getPro_no());
 	    	
-	    	ps.executeUpdate();
+	    	count = ps.executeUpdate();
 		    
 		} catch (  SQLException e) {
 			// TODO Auto-generated catch block
@@ -138,14 +138,15 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 				}
 			}
 		}
-		
+		return count;
 		
 	}
-
+    //刪除
 	@Override
-	public void delete(String ord_no ,String prom_project_id ,  String pro_no) {
+	public int delete(String ord_no ,String prom_project_id ,  String pro_no) {
 		Connection con = null;
 		PreparedStatement ps = null;
+		int count = 0;
 //		ResultSet rs = null;
 		try {
 //			ps = con.prepareStatement(DELETE_CHILDREN_PROM);
@@ -173,7 +174,7 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 
 			ps = con.prepareStatement(DELETE_DATA);
 			ps.setString(1, pro_no);
-			ps.executeUpdate();
+			count = ps.executeUpdate();
 			
 			
 		} catch (SQLException e) {
@@ -197,9 +198,9 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 				}
 			}
 		}
-		
+		return count ;
 	}
-
+    //全部查詢
 	@Override
 	public List<ProdouctVO> getAll() {
 		List<ProdouctVO> proVOList = new ArrayList<>();
@@ -262,7 +263,7 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 		
 		return proVOList;
 	}
-
+    //單次查詢
 	@Override
 	public ProdouctVO findByPK (String pro_no) {
 		ProdouctVO proVO = null;

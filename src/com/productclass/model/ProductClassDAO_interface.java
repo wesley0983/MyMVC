@@ -9,7 +9,7 @@ public interface ProductClassDAO_interface {
 	public abstract int update (ProductClassVO productClassVO );
 	//刪除
 	public abstract int delete (String prom_project_id , String ord_no , String pro_no , String pro_classid);
-	//查詢
+	//單筆查詢
 	ProductClassVO findByPK (String pro_classid);
 	//全部查詢
     public abstract List<ProductClassVO> getAll();

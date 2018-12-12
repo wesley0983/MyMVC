@@ -8,17 +8,17 @@ public class Ord_Main {
 		
 		OrdJDBCDAO ordDAO = new OrdJDBCDAO();
 		
-//		//新增
-//		OrdVO ordVO = new OrdVO();
-//		//ordVO.setOrd_no(ord_no); 自動
-//		ordVO.setMem_no("M001");
-//		//ordVO.setOrd_date(new java.sql.Timestamp); 自動 
-//		ordVO.setOrd_deldate(null);
-//		ordVO.setOrd_status("待出貨");
-//		ordVO.setOrd_backdeldate(null);
-//		ordVO.setOrd_amount(1000);
-//		ordVO.setOrd_backamount(10);
-//		System.out.println("成功新增" + ordDAO.insert(ordVO));
+		//新增
+		OrdVO ordVO = new OrdVO();
+		//ordVO.setOrd_no(ord_no); 自動
+		ordVO.setMem_no("M001");
+		//ordVO.setOrd_date(new java.sql.Timestamp); 自動 
+		ordVO.setOrd_deldate(null);
+		ordVO.setOrd_status("待出貨");
+		ordVO.setOrd_backdeldate(null);
+		ordVO.setOrd_amount(1000);
+		ordVO.setOrd_backamount(10);
+		System.out.println("成功新增" + ordDAO.insert(ordVO));
 //		
 //		//修改
 //		OrdVO ordVO1 = new OrdVO();
