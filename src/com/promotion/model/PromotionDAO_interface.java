@@ -8,7 +8,7 @@ public interface PromotionDAO_interface {
 	//修改
 	public abstract int updata (PromotionVO promotionVO);
 	//刪除
-	public abstract int detele (PromotionVO promotionVO);
+	public abstract int detele (String prom_project_id);
 	//單筆查詢
 	public abstract PromotionVO findByPK (String prom_project_id);
 	//全部查詢

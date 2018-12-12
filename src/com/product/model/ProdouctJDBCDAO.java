@@ -162,6 +162,7 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 //			ps.addBatch();
 //			ps.executeBatch();
 			
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			ps = con.prepareStatement(DELETE_CHILDREN_PROM);
 			ps.setString(1,prom_project_id );
 			ps.executeUpdate();
@@ -201,8 +202,8 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 
 	@Override
 	public List<ProdouctVO> getAll() {
-		List<ProdouctVO> provolist = new ArrayList<>();
-		ProdouctVO provo = null;
+		List<ProdouctVO> proVOList = new ArrayList<>();
+		ProdouctVO proVO = null;
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -212,21 +213,21 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 		    rs = ps.executeQuery();
 		    
 		    while(rs.next()) {
-		    	provo = new ProdouctVO();
-		    	provo.setPro_no(rs.getString("PRO_NO"));
-				provo.setPro_classid(rs.getString("PRO_CLASSID"));
-				provo.setPro_name(rs.getString("PRO_NAME"));
-				provo.setPro_pic(rs.getBytes("PRO_PIC"));
-				provo.setPro_pic_ext(rs.getString("PRO_PIC_EXT"));
-				provo.setPro_format(rs.getString("PRO_FORMAT"));
-				provo.setPro_bonus(rs.getInt("PRO_BONUS"));
-				provo.setPro_stock(rs.getInt("PRO_STOCK"));
-				provo.setPro_safestock(rs.getInt("PRO_SAFESTOCK"));
-				provo.setPro_details(rs.getString("PRO_DETAILS"));
-				provo.setPro_shelve(rs.getString("PRO_SHELVE"));
-				provo.setPro_all_assess(rs.getInt("PRO_ALL_ASSESS"));
-				provo.setPro_all_assessman(rs.getInt("PRO_ALL_ASSESSMAN"));
-		    	provolist.add(provo);
+		    	proVO = new ProdouctVO();
+		    	proVO.setPro_no(rs.getString("PRO_NO"));
+		    	proVO.setPro_classid(rs.getString("PRO_CLASSID"));
+		    	proVO.setPro_name(rs.getString("PRO_NAME"));
+		    	proVO.setPro_pic(rs.getBytes("PRO_PIC"));
+		    	proVO.setPro_pic_ext(rs.getString("PRO_PIC_EXT"));
+		    	proVO.setPro_format(rs.getString("PRO_FORMAT"));
+		    	proVO.setPro_bonus(rs.getInt("PRO_BONUS"));
+		    	proVO.setPro_stock(rs.getInt("PRO_STOCK"));
+		    	proVO.setPro_safestock(rs.getInt("PRO_SAFESTOCK"));
+		    	proVO.setPro_details(rs.getString("PRO_DETAILS"));
+		    	proVO.setPro_shelve(rs.getString("PRO_SHELVE"));
+		    	proVO.setPro_all_assess(rs.getInt("PRO_ALL_ASSESS"));
+		    	proVO.setPro_all_assessman(rs.getInt("PRO_ALL_ASSESSMAN"));
+		    	proVOList.add(proVO);
 		    }
 			
 		} catch (SQLException e) {
@@ -259,12 +260,12 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 			}
 		}
 		
-		return provolist;
+		return proVOList;
 	}
 
 	@Override
 	public ProdouctVO findByPK (String pro_no) {
-		ProdouctVO provo = null;
+		ProdouctVO proVO = null;
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -278,20 +279,20 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 			rs = ps.executeQuery();
 			
 			while (rs.next()) {
-				provo = new ProdouctVO();
-				provo.setPro_no(rs.getString("PRO_NO"));
-				provo.setPro_classid(rs.getString("PRO_CLASSID"));
-				provo.setPro_name(rs.getString("PRO_NAME"));
-				provo.setPro_pic(rs.getBytes("PRO_PIC"));
-				provo.setPro_pic_ext(rs.getString("PRO_PIC_EXT"));
-				provo.setPro_format(rs.getString("PRO_FORMAT"));
-				provo.setPro_bonus(rs.getInt("PRO_BONUS"));
-				provo.setPro_stock(rs.getInt("PRO_STOCK"));
-				provo.setPro_safestock(rs.getInt("PRO_SAFESTOCK"));
-				provo.setPro_details(rs.getString("PRO_DETAILS"));
-				provo.setPro_shelve(rs.getString("PRO_SHELVE"));
-				provo.setPro_all_assess(rs.getInt("PRO_ALL_ASSESS"));
-				provo.setPro_all_assessman(rs.getInt("PRO_ALL_ASSESSMAN"));
+				proVO = new ProdouctVO();
+				proVO.setPro_no(rs.getString("PRO_NO"));
+				proVO.setPro_classid(rs.getString("PRO_CLASSID"));
+				proVO.setPro_name(rs.getString("PRO_NAME"));
+				proVO.setPro_pic(rs.getBytes("PRO_PIC"));
+				proVO.setPro_pic_ext(rs.getString("PRO_PIC_EXT"));
+				proVO.setPro_format(rs.getString("PRO_FORMAT"));
+				proVO.setPro_bonus(rs.getInt("PRO_BONUS"));
+				proVO.setPro_stock(rs.getInt("PRO_STOCK"));
+				proVO.setPro_safestock(rs.getInt("PRO_SAFESTOCK"));
+				proVO.setPro_details(rs.getString("PRO_DETAILS"));
+				proVO.setPro_shelve(rs.getString("PRO_SHELVE"));
+				proVO.setPro_all_assess(rs.getInt("PRO_ALL_ASSESS"));
+				proVO.setPro_all_assessman(rs.getInt("PRO_ALL_ASSESSMAN"));
 				
 			}
 			
@@ -325,7 +326,7 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 			}
 		}
 		
-		return provo;
+		return proVO;
 	}
 
 	

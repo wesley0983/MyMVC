@@ -27,7 +27,7 @@ public class Product_Main {
         
         //修改
         ProdouctVO proVO2 = new ProdouctVO();
-        
+        proVO2.setPro_no("PR001");  
         proVO2.setPro_classid("PT001");
         proVO2.setPro_name("Addies");
         proVO2.setPro_pic(null);
@@ -40,7 +40,7 @@ public class Product_Main {
     	proVO2.setPro_shelve("上架中");
     	proVO2.setPro_all_assess(6);
     	proVO2.setPro_all_assessman(100);
-    	proVO2.setPro_no("PR001");
+    	
     	proDAO.update(proVO2);
     	System.out.println("成功修改");
  */       
@@ -80,8 +80,8 @@ public class Product_Main {
         	System.out.println("-----------------------------------");
     	}
     	
-    	//刪除  (雙子表格)   有問題需要改
-//    	proDAO.delete("20181212-000001" , "PR001" ,"P001");
+    	//刪除  (雙子表格)   
+    	proDAO.delete("20181212-000001" , "PR001" ,"P001");
     	
     	
 	}
