@@ -12,13 +12,13 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 	//新增
 	private static final String INSERT_INTO_DATA = "Insert into PRODUCT (PRO_NO,PRO_CLASSID,PRO_NAME,PRO_PIC,PRO_PIC_EXT,PRO_FORMAT,PRO_BONUS,PRO_STOCK,PRO_SAFESTOCK,PRO_DETAILS,PRO_SHELVE,PRO_ALL_ASSESS,PRO_ALL_ASSESSMAN) values ('PR'||LPAD(to_char(PRODUCT_SEQ.NEXTVAL), 3, '0'),?,?,?,?,?,?,?,?,?,?,?,?)";
 	//修改
-	private static final String INSERT_UPDATE = "UPDATE PRODUCT SET  PRO_CLASSID = ?, PRO_NAME = ?, PRO_PIC = ?, PRO_PIC_EXT = ?, PRO_FORMAT = ?, PRO_BONUS = ?, PRO_STOCK = ?, PRO_SAFESTOCK = ?, PRO_DETAILS = ?, PRO_SHELVE = ?, PRO_ALL_ASSESS = ?, PRO_ALL_ASSESSMAN = ? where PRO_NO = ?";
+	private static final String UPDATE = "UPDATE PRODUCT SET  PRO_CLASSID = ?, PRO_NAME = ?, PRO_PIC = ?, PRO_PIC_EXT = ?, PRO_FORMAT = ?, PRO_BONUS = ?, PRO_STOCK = ?, PRO_SAFESTOCK = ?, PRO_DETAILS = ?, PRO_SHELVE = ?, PRO_ALL_ASSESS = ?, PRO_ALL_ASSESSMAN = ? where PRO_NO = ?";
 	//單筆查詢、多筆查詢
-	private static final String SELETE_FINDBYPK = "select * from product where pro_no = ?";
-	private static final String SELETE_ALL = "SELECT * FROM PRODUCT";
+	private static final String SELECT_FINDBYPK = "select * from product where pro_no = ?";
+	private static final String SELECT_ALL = "SELECT * FROM PRODUCT";
 	//刪除
-	private static final String DELETE_CHILDREN_01 = "Delete FROM ORDDETAILS WHERE ORD_NO = ?";
-	private static final String DELETE_CHILDERN_02 = "Delete FROM PRO_DETAIL_PROM WHERE PROM_PROJECT_ID = ?";
+	private static final String DELETE_CHILDREN_PROM = "Delete FROM PRO_DETAIL_PROM WHERE PROM_PROJECT_ID = ?";
+	private static final String DELETE_CHILDREN_ORDDETAILS = "Delete FROM ORDDETAILS WHERE ORD_NO = ?";
 	private static final String DELETE_DATA = "Delete FROM PRODUCT WHERE PRO_NO = ?";
 	
 	
@@ -100,7 +100,7 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 		try {
 			
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
-		    ps = con.prepareStatement(INSERT_UPDATE);
+		    ps = con.prepareStatement(UPDATE);
 		    ps.setString(1,proVO.getPro_classid());
 	        ps.setString(2, proVO.getPro_name());
 	        ps.setBytes(3, proVO.getPro_pic());
@@ -148,28 +148,28 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 		PreparedStatement ps = null;
 //		ResultSet rs = null;
 		try {
-//			con = DriverManager.getConnection(URL, USER, PASSWORD);
-//			ps = con.prepareStatement(DELETE_CHILDREN_01);
-//			ps.setString(1,ord_no );
-//			ps.addBatch();
-//			
-//			ps = con.prepareStatement(DELETE_CHILDERN_02);
+//			ps = con.prepareStatement(DELETE_CHILDREN_PROM);
 //			ps.setString(1,prom_project_id );
-//			ps.addBatch();
+//			ps.addBatch();	
+//			
+//			con = DriverManager.getConnection(URL, USER, PASSWORD);
+//			ps = con.prepareStatement(DELETE_CHILDREN_ORDDETAILS);
+//			ps.setString(1,ord_no );
+//			ps.addBatch();	
 //			
 //			ps = con.prepareStatement(DELETE_DATA);
 //			ps.setString(1, pro_no);
 //			ps.addBatch();
 //			ps.executeBatch();
 			
-			ps = con.prepareStatement(DELETE_CHILDREN_01);
-			ps.setString(1,ord_no );
-			ps.executeUpdate();
-	
-			ps = con.prepareStatement(DELETE_CHILDERN_02);
+			ps = con.prepareStatement(DELETE_CHILDREN_PROM);
 			ps.setString(1,prom_project_id );
 			ps.executeUpdate();
 			
+			ps = con.prepareStatement(DELETE_CHILDREN_ORDDETAILS);
+			ps.setString(1,ord_no );
+			ps.executeUpdate();
+
 			ps = con.prepareStatement(DELETE_DATA);
 			ps.setString(1, pro_no);
 			ps.executeUpdate();
@@ -208,7 +208,7 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 		ResultSet rs = null;
 		try {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
-			ps = con.prepareStatement(SELETE_ALL);
+			ps = con.prepareStatement(SELECT_ALL);
 		    rs = ps.executeQuery();
 		    
 		    while(rs.next()) {
@@ -272,7 +272,7 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 		try {
 			
 			con =  DriverManager.getConnection(URL, USER, PASSWORD);
-			ps = con.prepareStatement(SELETE_FINDBYPK);
+			ps = con.prepareStatement(SELECT_FINDBYPK);
 			
 			ps.setString(1, pro_no);
 			rs = ps.executeQuery();

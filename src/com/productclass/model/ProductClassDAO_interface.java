@@ -4,11 +4,11 @@ import java.util.List;
 
 public interface ProductClassDAO_interface {
 	//新增
-	public abstract void insert (ProductClassVO proclassVO );
+	public abstract int insert (ProductClassVO productClassVO );
 	//修改
-	public abstract void update (ProductClassVO proclassVO );
+	public abstract int update (ProductClassVO productClassVO );
 	//刪除
-	public abstract void delete ();
+	public abstract int delete (String prom_project_id , String ord_no , String pro_no , String pro_classid);
 	//查詢
 	ProductClassVO findByPK (String pro_classid);
 	//全部查詢
