@@ -2,7 +2,7 @@ package com.orddetails.model;
 
 import java.util.List;
 
-import com.pro_detail_prom.model.Pro_detail_promVO;
+
 
 public interface Orddetails_interface {
 	

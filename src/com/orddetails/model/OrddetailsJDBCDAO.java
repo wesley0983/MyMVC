@@ -3,8 +3,7 @@ package com.orddetails.model;
 import java.sql.*;
 import java.util.*;
 
-import com.pro_detail_prom.model.Pro_detail_promVO;
-import com.promotion.model.PromotionVO;
+
 
 public class OrddetailsJDBCDAO implements Orddetails_interface{
 	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
