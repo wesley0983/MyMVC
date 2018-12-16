@@ -8,7 +8,7 @@
 
 <html>
 <head>
-<title>員工資料 - listOneEmp.jsp</title>
+<title>商品類別資料 - listOneEmp.jsp</title>
 
 <style>
   table#table-1 {
@@ -56,13 +56,9 @@
 
 <table>
 	<tr>
-		<th>員工編號</th>
-		<th>員工姓名</th>
-		<th>職位</th>
-		<th>雇用日期</th>
-		<th>薪水</th>
-		<th>獎金</th>
-		<th>部門</th>
+		<th>商品類別編號</th>
+		<th>商品類別名稱</th>
+	
 	</tr>
 	<tr>
 		<td><%=productClassVO.getPro_classid()%></td>
