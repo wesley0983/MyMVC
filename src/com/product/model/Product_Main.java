@@ -9,20 +9,20 @@ public class Product_Main {
 		ProdouctJDBCDAO proDAO = new ProdouctJDBCDAO();
 
 		//新增
-		ProdouctVO proVO1 = new ProdouctVO();
-        proVO1.setPro_classid("PT001");
-        proVO1.setPro_name("Addies");
-        proVO1.setPro_pic(null);
-        proVO1.setPro_pic_ext("PIC_EXT");
-        proVO1.setPro_format("9.5");
-        proVO1.setPro_bonus(2000);
-        proVO1.setPro_stock(20);
-        proVO1.setPro_safestock(5);
-    	proVO1.setPro_details("DETAILS");
-    	proVO1.setPro_shelve("ON");
-    	proVO1.setPro_all_assess(5);
-    	proVO1.setPro_all_assessman(10);
-        System.out.println("成功新增" + proDAO.insert(proVO1));
+//		ProdouctVO proVO1 = new ProdouctVO();
+//        proVO1.setPro_classid("PT001");
+//        proVO1.setPro_name("Addies");
+//        proVO1.setPro_pic(null);
+//        proVO1.setPro_pic_ext("PIC_EXT");
+//        proVO1.setPro_format("9.5");
+//        proVO1.setPro_bonus(2000);
+//        proVO1.setPro_stock(20);
+//        proVO1.setPro_safestock(5);
+//    	proVO1.setPro_details("DETAILS");
+//    	proVO1.setPro_shelve("ON");
+//    	proVO1.setPro_all_assess(5);
+//    	proVO1.setPro_all_assessman(10);
+//        System.out.println("成功新增" + proDAO.insert(proVO1));
 //        
 //        //修改
 //        ProdouctVO proVO2 = new ProdouctVO();
@@ -59,23 +59,23 @@ public class Product_Main {
 //    	System.out.println("-------------------------------------");
 // 
 //    	//多筆查詢
-//    	List<ProdouctVO> provolist = proDAO.getAll();
-//    	for (ProdouctVO proVO4 : provolist) {
-//        	System.out.println(proVO4.getPro_no() + ",");
-//        	System.out.println(proVO4.getPro_classid() + ",");
-//        	System.out.println(proVO4.getPro_name() + ",");
-//        	System.out.println(proVO4.getPro_pic() + ",");
-//        	System.out.println(proVO4.getPro_pic_ext() + ",");
-//        	System.out.println(proVO4.getPro_format() + ",");
-//        	System.out.println(proVO4.getPro_bonus() + ",");
-//        	System.out.println(proVO4.getPro_stock() + ",");
-//        	System.out.println(proVO4.getPro_safestock() + ",");
-//        	System.out.println(proVO4.getPro_details() + ",");
-//        	System.out.println(proVO4.getPro_shelve() + ",");
-//        	System.out.println(proVO4.getPro_all_assess() + ",");
-//        	System.out.println(proVO4.getPro_all_assessman() + ",");
-//        	System.out.println("-----------------------------------");
-//    	}
+    	List<ProdouctVO> provolist = proDAO.getAll();
+    	for (ProdouctVO proVO4 : provolist) {
+        	System.out.println(proVO4.getPro_no() + ",");
+        	System.out.println(proVO4.getPro_classid() + ",");
+        	System.out.println(proVO4.getPro_name() + ",");
+        	System.out.println(proVO4.getPro_pic() + ",");
+        	System.out.println(proVO4.getPro_pic_ext() + ",");
+        	System.out.println(proVO4.getPro_format() + ",");
+        	System.out.println(proVO4.getPro_bonus() + ",");
+        	System.out.println(proVO4.getPro_stock() + ",");
+        	System.out.println(proVO4.getPro_safestock() + ",");
+        	System.out.println(proVO4.getPro_details() + ",");
+        	System.out.println(proVO4.getPro_shelve() + ",");
+        	System.out.println(proVO4.getPro_all_assess() + ",");
+        	System.out.println(proVO4.getPro_all_assessman() + ",");
+        	System.out.println("-----------------------------------");
+    	}
 //    	
 //    	//刪除   (雙子表格)   
 //    	System.out.println("成功刪除" + proDAO.delete("20181217-000001" , "PR001" ,"P001"));//測試的話日期每天需要修改才能

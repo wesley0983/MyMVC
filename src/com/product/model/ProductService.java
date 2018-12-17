@@ -1,5 +1,7 @@
 package com.product.model;
 
+import java.util.List;
+
 import com.productclass.model.ProductClassVO;
 
 public class ProductService {
@@ -40,5 +42,8 @@ public class ProductService {
 	    return prodouctDAO.findByPK(pro_no);	
 	}
 	
+	public List<ProdouctVO> getAll(){
+		return prodouctDAO.getAll();
+	} 
 	
 }

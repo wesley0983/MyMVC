@@ -4,7 +4,7 @@
 
 
 <%
-ProdouctVO prodouctVO = (ProdouctVO) request.getAttribute("empVO");
+	ProdouctVO prodouctVO = (ProdouctVO) request.getAttribute("empVO");
 %>
 
 <%= prodouctVO == null %>
@@ -74,7 +74,7 @@ ProdouctVO prodouctVO = (ProdouctVO) request.getAttribute("empVO");
     <tr>
 		<td>商品類別編號(需要拉選單):</td>
 		<td><input type="TEXT" name="pro_classid" size="45" 
-			 value="<%= (prodouctVO==null)? "吳永志" : prodouctVO.getPro_classid()%>" /></td>
+			 value="<%= (prodouctVO==null)? "PT001" : prodouctVO.getPro_classid()%>" /></td>
 	</tr>
     <tr>
 		<td>商品名稱:</td>

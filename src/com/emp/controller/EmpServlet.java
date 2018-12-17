@@ -220,8 +220,8 @@ public class EmpServlet extends HttpServlet {
 
 			try {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
-				String pic_ext = req.getParameter("pic_ext");
-				String ename = req.getParameter("ename");
+				
+				
 //				String enameReg = "/./";
 //				if (ename == null || ename.trim().length() == 0) {
 //					errorMsgs.add("商品類別名稱: 請勿空白");
@@ -229,8 +229,11 @@ public class EmpServlet extends HttpServlet {
 //					errorMsgs.add("商品類別名稱: 只能是中、英文字母、數字和_ , 且長度必需在2到15之間");
 //	            }
 				
-				//圖片給空
+				
 				String pro_classid = req.getParameter("pro_classid");
+				String ename = req.getParameter("ename");
+				//圖片給空
+				String pic_ext = req.getParameter("pic_ext");
 				String format = req.getParameter("format");
 				Integer bonus = new Integer(req.getParameter("bonus").trim());
 				Integer stock = new Integer(req.getParameter("stock").trim());
@@ -243,7 +246,7 @@ public class EmpServlet extends HttpServlet {
 				ProdouctVO prodouctVO = new ProdouctVO();
 				prodouctVO.setPro_classid(pro_classid);
 		        prodouctVO.setPro_name(ename);
-		        prodouctVO.setPro_pic(null);
+		        prodouctVO.setPro_pic(null);//圖片給空
 		        prodouctVO.setPro_pic_ext(pic_ext);
 		        prodouctVO.setPro_format(format);
 		        prodouctVO.setPro_bonus(bonus);
@@ -253,6 +256,19 @@ public class EmpServlet extends HttpServlet {
 		    	prodouctVO.setPro_shelve(shelve);
 		    	prodouctVO.setPro_all_assess(assess);
 		    	prodouctVO.setPro_all_assessman(assessman);
+		    	
+                System.out.println(prodouctVO.getPro_classid());
+		        System.out.println(prodouctVO.getPro_name());
+		        System.out.println(prodouctVO.getPro_pic());
+		        System.out.println(prodouctVO.getPro_pic_ext());
+		        System.out.println(prodouctVO.getPro_format());
+                System.out.println(prodouctVO.getPro_bonus());
+                System.out.println(prodouctVO.getPro_stock());
+                System.out.println(prodouctVO.getPro_safestock());
+		    	System.out.println(prodouctVO.getPro_details());
+		    	System.out.println(prodouctVO.getPro_shelve());
+		        System.out.println(prodouctVO.getPro_all_assess());
+		        System.out.println(prodouctVO.getPro_all_assessman());
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -264,8 +280,8 @@ public class EmpServlet extends HttpServlet {
 				}
 				
 				/***************************2.開始新增資料***************************************/
-				ProductService proClassSvc = new ProductService();
-				prodouctVO = proClassSvc.addPro(pro_classid,ename,null,pic_ext,format,bonus,stock,safestock,details,shelve,assess,assessman);
+				ProductService proSvc = new ProductService();
+				prodouctVO = proSvc.addPro(pro_classid,ename,null,pic_ext,format,bonus,stock,safestock,details,shelve,assess,assessman);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				String url = "/emp/listAllEmp.jsp";
