@@ -7,8 +7,10 @@ public interface ProdouctDAO_interface {
 	public abstract int insert (ProdouctVO proVO);
     //更新
 	public abstract int update (ProdouctVO proVO);
-    //刪除
+    //刪除 多筆刪除
 	public abstract int delete (String ord_no ,String prom_project_id , String pro_no );
+	//刪除
+	public abstract int delete (String pro_no );
     //單筆查詢
 	ProdouctVO findByPK (String pro_no);
 	//全部查詢    

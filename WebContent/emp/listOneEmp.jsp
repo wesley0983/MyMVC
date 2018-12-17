@@ -1,9 +1,10 @@
+<%@page import="com.product.model.*"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
-<%@ page import="com.productclass.model.*"%>
+
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
-  ProductClassVO productClassVO = (ProductClassVO) request.getAttribute("empVO"); //EmpServlet.java(Concroller), 存入req的empVO物件
+	ProdouctVO prodouctVO = (ProdouctVO) request.getAttribute("empVO"); //EmpServlet.java(Concroller), 存入req的empVO物件
 %>
 
 <html>
@@ -56,15 +57,36 @@
 
 <table>
 	<tr>
-		<th>商品類別編號</th>
-		<th>商品類別名稱</th>
+		<td>商品編號</td>
+		<td>商品類別編號</td>
+		<td>商品名稱</td>
+		<td>商品圖片</td>
+		<td>照片副檔名</td>
+		<td>商品規格</td>
+		<td>商品單價</td>
+		<td>商品庫存量</td>
+		<td>商品安全庫存量</td>
+		<td>商品詳述</td>
+		<td>商品狀態</td>
+		<td>商品總評價</td>
+		<td>商品評價總人數</td>
 	
 	</tr>
 	<tr>
-		<td><%=productClassVO.getPro_classid()%></td>
-		<td><%=productClassVO.getPro_classname()%></td>
-
-		
+	     <td><%=prodouctVO.getPro_no()%></td>
+		 <td><%=prodouctVO.getPro_classid()%></td>
+		 <td><%=prodouctVO.getPro_name()%></td>
+		 <td><%=prodouctVO.getPro_pic()%></td>
+		 <td><%=prodouctVO.getPro_pic_ext()%></td>
+		 <td><%=prodouctVO.getPro_format()%></td>
+		 <td><%=prodouctVO.getPro_bonus()%></td>
+		 <td><%=prodouctVO.getPro_stock()%></td>
+		 <td><%=prodouctVO.getPro_safestock()%></td>
+		 <td><%=prodouctVO.getPro_details()%></td>
+		 <td><%=prodouctVO.getPro_shelve()%></td>
+		 <td><%=prodouctVO.getPro_all_assess()%></td>
+		 <td><%=prodouctVO.getPro_all_assessman()%></td>
+	
 	</tr>
 </table>
 

@@ -6,7 +6,8 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-
+import com.product.model.ProdouctVO;
+import com.product.model.ProductService;
 import com.productclass.model.ProductClassService;
 import com.productclass.model.ProductClassVO;
 
@@ -22,7 +23,7 @@ public class EmpServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		System.out.println(action);
+		
 		
 		if ("getOne_For_Display".equals(action)) { //來自select_page.jsp的請求
 
@@ -46,8 +47,8 @@ public class EmpServlet extends HttpServlet {
 					return;//程式中斷
 				}
 				
-				String pro_classid = null;
-				pro_classid = str;
+				String pro_no = null;
+				pro_no = str;
 //				try {
 //					empno = new Integer(str);
 //				} catch (Exception e) {
@@ -62,9 +63,9 @@ public class EmpServlet extends HttpServlet {
 				}
 				
 				/***************************2.開始查詢資料*****************************************/
-				ProductClassService proClassSvc = new ProductClassService();
-				ProductClassVO productClassVO = proClassSvc.getOneProductClass(pro_classid);
-				if (productClassVO == null) {
+				ProductService proSvc = new ProductService();
+				ProdouctVO proVO = proSvc.getOneProduct(pro_no);
+				if (proVO == null) {
 					errorMsgs.add("查無資料");
 				}
 				// Send the use back to the form, if there were errors
@@ -76,7 +77,7 @@ public class EmpServlet extends HttpServlet {
 				}
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
-				req.setAttribute("empVO", productClassVO); // 資料庫取出的empVO物件,存入req
+				req.setAttribute("empVO", proVO); // 資料庫取出的empVO物件,存入req
 				String url = "/emp/listOneEmp.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // ���\��� listOneEmp.jsp
 				successView.forward(req, res);
@@ -173,7 +174,7 @@ public class EmpServlet extends HttpServlet {
 
 				Integer deptno = new Integer(req.getParameter("deptno").trim());
 
-				ProductClassVO empVO = new ProductClassVO();
+				ProdouctVO empVO = new ProdouctVO();
 //				empVO.setEmpno(empno);
 //				empVO.setEname(ename);
 //				empVO.setJob(job);
@@ -219,56 +220,43 @@ public class EmpServlet extends HttpServlet {
 
 			try {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
+				String pic_ext = req.getParameter("pic_ext");
 				String ename = req.getParameter("ename");
-				String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,15}$";
-				if (ename == null || ename.trim().length() == 0) {
-					errorMsgs.add("商品類別名稱: 請勿空白");
-				} else if(!ename.trim().matches(enameReg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("商品類別名稱: 只能是中、英文字母、數字和_ , 且長度必需在2到15之間");
-	            }
+//				String enameReg = "/./";
+//				if (ename == null || ename.trim().length() == 0) {
+//					errorMsgs.add("商品類別名稱: 請勿空白");
+//				} else if(!ename.trim().matches(enameReg)) { //以下練習正則(規)表示式(regular-expression)
+//					errorMsgs.add("商品類別名稱: 只能是中、英文字母、數字和_ , 且長度必需在2到15之間");
+//	            }
 				
-				String proClassName = req.getParameter("proClassName").trim();
-				if (proClassName == null || proClassName.trim().length() == 0) {
-					errorMsgs.add("職位請勿空白");
-				}
-				
-//				java.sql.Date hiredate = null;
-//				try {
-//					hiredate = java.sql.Date.valueOf(req.getParameter("hiredate").trim());
-//				} catch (IllegalArgumentException e) {
-//					hiredate=new java.sql.Date(System.currentTimeMillis());
-//					errorMsgs.add("請輸入日期");
-//				}
-				
-//				Double sal = null;
-//				try {
-//					sal = new Double(req.getParameter("sal").trim());
-//				} catch (NumberFormatException e) {
-//					sal = 0.0;
-//					errorMsgs.add("薪水請填數字.");
-//				}
-				
-//				Double comm = null;
-//				try {
-//					comm = new Double(req.getParameter("comm").trim());
-//				} catch (NumberFormatException e) {
-//					comm = 0.0;
-//					errorMsgs.add("獎金請填數字..");
-//				}
-				
-				Integer deptno = new Integer(req.getParameter("deptno").trim());
+				//圖片給空
+				String pro_classid = req.getParameter("pro_classid");
+				String format = req.getParameter("format");
+				Integer bonus = new Integer(req.getParameter("bonus").trim());
+				Integer stock = new Integer(req.getParameter("stock").trim());
+				Integer safestock = new Integer(req.getParameter("stock").trim());
+				String details = req.getParameter("details");
+				String shelve = req.getParameter("shelve");
+				Integer assess = new Integer(req.getParameter("assess").trim());
+				Integer assessman = new Integer(req.getParameter("assessman").trim());
 
-				ProductClassVO empVO = new ProductClassVO();
-//				empVO.setEname(ename);
-//				empVO.setJob(job);
-//				empVO.setHiredate(hiredate);
-//				empVO.setSal(sal);
-//				empVO.setComm(comm);
-//				empVO.setDeptno(deptno);
+				ProdouctVO prodouctVO = new ProdouctVO();
+				prodouctVO.setPro_classid(pro_classid);
+		        prodouctVO.setPro_name(ename);
+		        prodouctVO.setPro_pic(null);
+		        prodouctVO.setPro_pic_ext(pic_ext);
+		        prodouctVO.setPro_format(format);
+		        prodouctVO.setPro_bonus(bonus);
+		        prodouctVO.setPro_stock(stock);
+		        prodouctVO.setPro_safestock(safestock);
+		    	prodouctVO.setPro_details(details);
+		    	prodouctVO.setPro_shelve(shelve);
+		    	prodouctVO.setPro_all_assess(assess);
+		    	prodouctVO.setPro_all_assessman(assessman);
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("empVO", empVO); // 含有輸入格式錯誤的empVO物件,也存入req
+					req.setAttribute("empVO", prodouctVO); // 含有輸入格式錯誤的empVO物件,也存入req
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/emp/addEmp.jsp");
 					failureView.forward(req, res);
@@ -276,8 +264,8 @@ public class EmpServlet extends HttpServlet {
 				}
 				
 				/***************************2.開始新增資料***************************************/
-				ProductClassService empSvc = new ProductClassService();
-//				empVO = empSvc.addEmp(ename, job, hiredate, sal, comm, deptno);
+				ProductService proClassSvc = new ProductService();
+				prodouctVO = proClassSvc.addPro(pro_classid,ename,null,pic_ext,format,bonus,stock,safestock,details,shelve,assess,assessman);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				String url = "/emp/listAllEmp.jsp";

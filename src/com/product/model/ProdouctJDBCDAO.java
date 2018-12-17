@@ -20,15 +20,16 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 	//刪除
 	private static final String DELETE_CHILDREN_PROM = "Delete FROM PRO_DETAIL_PROM WHERE PROM_PROJECT_ID = ?";
 	private static final String DELETE_CHILDREN_ORDDETAILS = "Delete FROM ORDDETAILS WHERE ORD_NO = ?";
-	private static final String DELETE_DATA = "Delete FROM PRODUCT WHERE PRO_NO = ?";
+	private static final String DELETE = "Delete FROM PRODUCT WHERE PRO_NO = ?";
 	
 	
 	static {
 		try {
 			Class.forName(DRIVER);
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
 		}
 	}
 	
@@ -118,9 +119,10 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 	    	
 	    	count = ps.executeUpdate();
 		    
-		} catch (  SQLException e) {
+		} catch (SQLException  e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
+			
 		} finally {
 			if (ps != null) {
 				try {
@@ -142,7 +144,44 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 		return count;
 		
 	}
-    //刪除
+	//刪除
+		@Override
+		public int delete( String pro_no) {
+			Connection con = null;
+			PreparedStatement ps = null;
+			int count = 0;
+			try {				
+				con = DriverManager.getConnection(URL, USER, PASSWORD);
+				ps = con.prepareStatement(DELETE);
+				ps.setString(1, pro_no);
+				count = ps.executeUpdate();
+				
+				
+			} catch (SQLException  e) {
+				// TODO Auto-generated catch block
+				throw new RuntimeException(e.getMessage());
+				
+			} finally {
+				if(ps != null) {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+			return count ;
+		}
+    //刪除  多筆刪除
 	@Override
 	public int delete(String ord_no ,String prom_project_id ,  String pro_no) {
 		Connection con = null;
@@ -173,14 +212,15 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 			ps.setString(1,ord_no );
 			ps.executeUpdate();
 
-			ps = con.prepareStatement(DELETE_DATA);
+			ps = con.prepareStatement(DELETE);
 			ps.setString(1, pro_no);
 			count = ps.executeUpdate();
 			
 			
-		} catch (SQLException e) {
+		} catch (SQLException  e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
+			
 		} finally {
 			if(ps != null) {
 				try {
@@ -232,9 +272,10 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 		    	proVOList.add(proVO);
 		    }
 			
-		} catch (SQLException e) {
+		} catch (SQLException  e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
+			
 		} finally {
 			if(rs != null) {
 				try {
@@ -298,9 +339,10 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 				
 			}
 			
-		} catch (  SQLException e) {
+		} catch (SQLException  e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
+			
 		} finally {
 			if(rs != null) {
 				try {

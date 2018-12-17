@@ -9,24 +9,24 @@ public class Product_Main {
 		ProdouctJDBCDAO proDAO = new ProdouctJDBCDAO();
 
 		//新增
-//		ProdouctVO proVO1 = new ProdouctVO();
-//        proVO1.setPro_classid("PT001");
-//        proVO1.setPro_name("Addies");
-//        proVO1.setPro_pic(null);
-//        proVO1.setPro_pic_ext("PIC_EXT");
-//        proVO1.setPro_format("9.5");
-//        proVO1.setPro_bonus(2000);
-//        proVO1.setPro_stock(20);
-//        proVO1.setPro_safestock(5);
-//    	proVO1.setPro_details("DETAILS");
-//    	proVO1.setPro_shelve("ON");
-//    	proVO1.setPro_all_assess(5);
-//    	proVO1.setPro_all_assessman(10);
-//        System.out.println("成功新增" + proDAO.insert(proVO1));
+		ProdouctVO proVO1 = new ProdouctVO();
+        proVO1.setPro_classid("PT001");
+        proVO1.setPro_name("Addies");
+        proVO1.setPro_pic(null);
+        proVO1.setPro_pic_ext("PIC_EXT");
+        proVO1.setPro_format("9.5");
+        proVO1.setPro_bonus(2000);
+        proVO1.setPro_stock(20);
+        proVO1.setPro_safestock(5);
+    	proVO1.setPro_details("DETAILS");
+    	proVO1.setPro_shelve("ON");
+    	proVO1.setPro_all_assess(5);
+    	proVO1.setPro_all_assessman(10);
+        System.out.println("成功新增" + proDAO.insert(proVO1));
 //        
 //        //修改
 //        ProdouctVO proVO2 = new ProdouctVO();
-//        proVO2.setPro_no("PR001");  
+//        proVO2.setPro_no("P001");  
 //        proVO2.setPro_classid("PT001");
 //        proVO2.setPro_name("Addies");
 //        proVO2.setPro_pic(null);
@@ -77,8 +77,11 @@ public class Product_Main {
 //        	System.out.println("-----------------------------------");
 //    	}
 //    	
-//    	//刪除  (雙子表格)   
-//    	System.out.println("成功刪除" + proDAO.delete("20181212-000001" , "PR001" ,"P001"));//測試的話日期每天需要修改才能
+//    	//刪除   (雙子表格)   
+//    	System.out.println("成功刪除" + proDAO.delete("20181217-000001" , "PR001" ,"P001"));//測試的話日期每天需要修改才能
+//    	//刪除      
+//    	System.out.println("成功刪除" + proDAO.delete("P001"));//測試的話日期每天需要修改才能
+   	
     	
 	}
 
