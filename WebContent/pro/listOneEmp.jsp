@@ -4,7 +4,7 @@
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
-	ProdouctVO prodouctVO = (ProdouctVO) request.getAttribute("empVO"); //EmpServlet.java(Concroller), 存入req的empVO物件
+	ProductVO proVO = (ProductVO) request.getAttribute("empVO"); //EmpServlet.java(Concroller), 存入req的empVO物件
 %>
 
 <html>
@@ -73,19 +73,19 @@
 	
 	</tr>
 	<tr>
-	     <td><%=prodouctVO.getPro_no()%></td>
-		 <td><%=prodouctVO.getPro_classid()%></td>
-		 <td><%=prodouctVO.getPro_name()%></td>
-		 <td><%=prodouctVO.getPro_pic()%></td>
-		 <td><%=prodouctVO.getPro_pic_ext()%></td>
-		 <td><%=prodouctVO.getPro_format()%></td>
-		 <td><%=prodouctVO.getPro_bonus()%></td>
-		 <td><%=prodouctVO.getPro_stock()%></td>
-		 <td><%=prodouctVO.getPro_safestock()%></td>
-		 <td><%=prodouctVO.getPro_details()%></td>
-		 <td><%=prodouctVO.getPro_shelve()%></td>
-		 <td><%=prodouctVO.getPro_all_assess()%></td>
-		 <td><%=prodouctVO.getPro_all_assessman()%></td>
+	     <td><%=proVO.getPro_no()%></td>
+		 <td><%=proVO.getPro_classid()%></td>
+		 <td><%=proVO.getPro_name()%></td>
+		 <td><%=proVO.getPro_pic()%></td>
+		 <td><%=proVO.getPro_pic_ext()%></td>
+		 <td><%=proVO.getPro_format()%></td>
+		 <td><%=proVO.getPro_bonus()%></td>
+		 <td><%=proVO.getPro_stock()%></td>
+		 <td><%=proVO.getPro_safestock()%></td>
+		 <td><%=proVO.getPro_details()%></td>
+		 <td><%=proVO.getPro_shelve()%></td>
+		 <td><%=proVO.getPro_all_assess()%></td>
+		 <td><%=proVO.getPro_all_assessman()%></td>
 	
 	</tr>
 </table>

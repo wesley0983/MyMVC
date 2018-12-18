@@ -6,17 +6,11 @@
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
-ProductService proSvc = new ProductService();
-    List<ProdouctVO> list = proSvc.getAll();
-    pageContext.setAttribute("list2",list);
+	ProductService proSvc = new ProductService();
+    List<ProductVO> list = proSvc.getAll();
+    pageContext.setAttribute("list",list);
 %>
-<%
-for (int i = 0 ; i < list.size() ; i ++) {
-	ProdouctVO obj = list.get(i);
-	
-%>
-    <%= obj.getPro_name() %>
-<%} %>
+
 
 <html>
 <head>
@@ -78,43 +72,48 @@ for (int i = 0 ; i < list.size() ; i ++) {
 
 <table>
 	<tr>
-		<th>員工編號</th>
-		<th>員工姓名</th>
-		<th>職位</th>
-		<th>雇用日期</th>
-		<th>薪水</th>
-		<th>獎金</th>
-		<th>部門</th>
-		<th>修改</th>
-		<th>刪除</th>
+	    <th>商品編號:</th>
+		<th>商品類別編號(需要拉選單):</th>
+		<th>商品名稱:</th>
+		<th>照片:</th>
+		<th>照片副檔名:</th>
+		<th>商品規格:</th>
+		<th>商品單價:</th>
+		<th>商品庫存量:</th>
+		<th>商品安全庫存量:</th>
+		<th>商品詳述:</th>
+		<th>商品狀態:</th>
+		<th>商品總評價:</th>
+		<th>商品評價總人數:</th>
+		
 	</tr>
 	<%@ include file="page1.file" %> 
-	<c:forEach var="prodouctVO" items="${list2}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+	<c:forEach var="proVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		
 		<tr>
-		    <td>${productVO.pro_no}</td>
-			<td>${productVO.pro_classid}</td>
-			<td>${productVO.pro_name}</td>
-			<td>${productVO.pro_pic}</td>
-			<td>${productVO.pro_pic_ext}</td>
-			<td>${productVO.pro_format}</td>
-			<td>${productVO.pro_bonus}</td>
-			<td>${productVO.pro_stock}</td>
-			<td>${productVO.pro_safestock}</td>
-			<td>${productVO.pro_details}</td>
-			<td>${productVO.pro_shelve}</td>
-			<td>${productVO.pro_all_assess}</td>
-			<td>${productVO.pro_all_assessman}</td>
+		    <td>${proVO.pro_no}</td>
+			<td>${proVO.pro_classid}</td>
+			<td>${proVO.pro_name}</td>
+			<td>${proVO.pro_pic}</td>
+			<td>${proVO.pro_pic_ext}</td>
+			<td>${proVO.pro_format}</td>
+			<td>${proVO.pro_bonus}</td>
+			<td>${proVO.pro_stock}</td>
+			<td>${proVO.pro_safestock}</td>
+			<td>${proVO.pro_details}</td>
+			<td>${proVO.pro_shelve}</td>
+			<td>${proVO.pro_all_assess}</td>
+			<td>${proVO.pro_all_assessman}</td>
 		<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/emp/emp.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/pro/pro.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">
-			     <input type="hidden" name="empno"  value="${empVO.empno}">
+			     <input type="hidden" name="pro_no"  value="${proVO.pro_no}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/emp/emp.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/pro/pro.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="刪除">
-			     <input type="hidden" name="empno"  value="${empVO.empno}">
+			     <input type="hidden" name="pro_no"  value="${proVO.pro_no}">
 			     <input type="hidden" name="action" value="delete"></FORM>
 			</td>
 		</tr>

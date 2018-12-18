@@ -52,9 +52,9 @@
   
   
   <li>
-    <FORM METHOD="post" ACTION="emp.do" >
+    <FORM METHOD="post" ACTION="pro.do" >
         <b>輸入員工編號 (如7001):</b>
-        <input type="text" name="empno">
+        <input type="text" name="pro_no">
         <input type="hidden" name="action" value="getOne_For_Display">
         <input type="submit" value="送出">
     </FORM>

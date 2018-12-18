@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProdouctJDBCDAO implements ProdouctDAO_interface{
+public class ProductJDBCDAO implements ProductDAO_interface{
 	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
 	private static final String USER = "test";
@@ -36,7 +36,7 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 	
 	
 	@Override  //新增
-	public int insert(ProdouctVO proVO) {
+	public int insert(ProductVO proVO) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		int count = 0 ;
@@ -44,6 +44,9 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 				con = DriverManager.getConnection(URL, USER, PASSWORD);
 				
 		        ps = con.prepareStatement(INSERT);
+		        
+
+		        
 		        ps.setString(1,proVO.getPro_classid());
 		        ps.setString(2, proVO.getPro_name());
 		        ps.setBytes(3, proVO.getPro_pic());
@@ -56,6 +59,8 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 		    	ps.setString (10,proVO.getPro_shelve());
 		    	ps.setInt (11,proVO.getPro_all_assess());
 		    	ps.setInt (12,proVO.getPro_all_assessman());
+		    	
+
 		        
 		    	count = ps.executeUpdate();
 		        
@@ -95,7 +100,7 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 	}
     //更新
 	@Override
-	public int update(ProdouctVO proVO) {
+	public int update(ProductVO proVO) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		int count = 0;
@@ -103,6 +108,21 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 			
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 		    ps = con.prepareStatement(UPDATE);
+		    
+	    	System.out.println("getPro_classid" + proVO.getPro_classid());
+	        System.out.println("getPro_name" + proVO.getPro_name());
+	        System.out.println("getPro_pic" + proVO.getPro_pic());
+	        System.out.println("getPro_pic_ext" + proVO.getPro_pic_ext());
+	        System.out.println("getPro_format" + proVO.getPro_format());
+            System.out.println("getPro_bonus" + proVO.getPro_bonus());
+            System.out.println("getPro_stock" + proVO.getPro_stock());
+            System.out.println("getPro_safestock" + proVO.getPro_safestock());
+	    	System.out.println("getPro_details" + proVO.getPro_details());
+	    	System.out.println("getPro_shelve" + proVO.getPro_shelve());
+	        System.out.println("getPro_all_assess" + proVO.getPro_all_assess());
+	        System.out.println("getPro_all_assessman" + proVO.getPro_all_assessman());
+	        System.out.println("getgetPro_no" + proVO.getPro_no());
+		    
 		    ps.setString(1,proVO.getPro_classid());
 	        ps.setString(2, proVO.getPro_name());
 	        ps.setBytes(3, proVO.getPro_pic());
@@ -243,9 +263,9 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 	}
     //全部查詢
 	@Override
-	public List<ProdouctVO> getAll() {
-		List<ProdouctVO> proVOList = new ArrayList<>();
-		ProdouctVO proVO = null;
+	public List<ProductVO> getAll() {
+		List<ProductVO> proVOList = new ArrayList<>();
+		ProductVO proVO = null;
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -255,7 +275,7 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 		    rs = ps.executeQuery();
 		    
 		    while(rs.next()) {
-		    	proVO = new ProdouctVO();
+		    	proVO = new ProductVO();
 		    	proVO.setPro_no(rs.getString("PRO_NO"));
 		    	proVO.setPro_classid(rs.getString("PRO_CLASSID"));
 		    	proVO.setPro_name(rs.getString("PRO_NAME"));
@@ -307,8 +327,8 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 	}
     //單次查詢
 	@Override
-	public ProdouctVO findByPK (String pro_no) {
-		ProdouctVO proVO = null;
+	public ProductVO findByPK (String pro_no) {
+		ProductVO proVO = null;
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -322,7 +342,7 @@ public class ProdouctJDBCDAO implements ProdouctDAO_interface{
 			rs = ps.executeQuery();
 			
 			while (rs.next()) {
-				proVO = new ProdouctVO();
+				proVO = new ProductVO();
 				proVO.setPro_no(rs.getString("PRO_NO"));
 				proVO.setPro_classid(rs.getString("PRO_CLASSID"));
 				proVO.setPro_name(rs.getString("PRO_NAME"));

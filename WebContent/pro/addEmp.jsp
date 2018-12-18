@@ -4,10 +4,10 @@
 
 
 <%
-	ProdouctVO prodouctVO = (ProdouctVO) request.getAttribute("empVO");
+	ProductVO proVO = (ProductVO) request.getAttribute("empVO");
 %>
 
-<%= prodouctVO == null %>
+<%= proVO == null %>
 
 
 <html>
@@ -69,63 +69,63 @@
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="emp.do" name="form1">
+<FORM METHOD="post" ACTION="pro.do" name="form1">
 <table>
     <tr>
 		<td>商品類別編號(需要拉選單):</td>
 		<td><input type="TEXT" name="pro_classid" size="45" 
-			 value="<%= (prodouctVO==null)? "PT001" : prodouctVO.getPro_classid()%>" /></td>
+			 value="<%= (proVO==null)? "PT001" : proVO.getPro_classid()%>" /></td>
 	</tr>
     <tr>
 		<td>商品名稱:</td>
 		<td><input type="TEXT" name="ename" size="45" 
-			 value="<%= (prodouctVO==null)? "吳永志" : prodouctVO.getPro_name()%>" /></td>
+			 value="<%= (proVO==null)? "吳永志" : proVO.getPro_name()%>" /></td>
 	</tr>
 	
 	<tr>
 		<td>照片副檔名:</td>
 		<td><input type="TEXT" name="pic_ext" size="45"
-			 value="<%= (prodouctVO==null)? "MANAGER" : prodouctVO.getPro_pic_ext()%>" /></td>
+			 value="<%= (proVO==null)? "MANAGER" : proVO.getPro_pic_ext()%>" /></td>
 	</tr>
 	<tr>
 		<td>商品規格:</td>
 		<td><input type="TEXT" name="format" size="45"
-			 value="<%= (prodouctVO==null)? "MANAGER" : prodouctVO.getPro_format()%>" /></td>
+			 value="<%= (proVO==null)? "MANAGER" : proVO.getPro_format()%>" /></td>
 	</tr>
 	<tr>
 		<td>商品單價:</td>
 		<td><input type="TEXT" name="bonus" size="45"
-			 value="<%= (prodouctVO==null)? "123" : prodouctVO.getPro_bonus()%>" /></td>
+			 value="<%= (proVO==null)? "123" : proVO.getPro_bonus()%>" /></td>
 	</tr>
 	<tr>
 		<td>商品庫存量:</td>
 		<td><input type="TEXT" name="stock" size="45"
-			 value="<%= (prodouctVO==null)? "123" : prodouctVO.getPro_stock()%>" /></td>
+			 value="<%= (proVO==null)? "123" : proVO.getPro_stock()%>" /></td>
 	</tr>
 	<tr>
 		<td>商品安全庫存量:</td>
 		<td><input type="TEXT" name="safestock" size="45"
-			 value="<%= (prodouctVO==null)? "123" : prodouctVO.getPro_safestock()%>" /></td>
+			 value="<%= (proVO==null)? "123" : proVO.getPro_safestock()%>" /></td>
 	</tr>
 	<tr>
 		<td>商品詳述:</td>
 		<td><input type="TEXT" name="details" size="45"
-			 value="<%= (prodouctVO==null)? "MANAGER" : prodouctVO.getPro_details()%>" /></td>
+			 value="<%= (proVO==null)? "MANAGER" : proVO.getPro_details()%>" /></td>
 	</tr>
 	<tr>
 		<td>商品狀態:</td>
 		<td><input type="TEXT" name="shelve" size="45"
-			 value="<%= (prodouctVO==null)? "MANAGER" : prodouctVO.getPro_shelve()%>" /></td>
+			 value="<%= (proVO==null)? "MANAGER" : proVO.getPro_shelve()%>" /></td>
 	</tr>
 	<tr>
 		<td>商品總評價:</td>
 		<td><input type="TEXT" name="assess" size="45"
-			 value="<%= (prodouctVO==null)? "123" : prodouctVO.getPro_all_assess()%>" /></td>
+			 value="<%= (proVO==null)? "123" : proVO.getPro_all_assess()%>" /></td>
 	</tr>
 	<tr>
 		<td>商品評價總人數:</td>
 		<td><input type="TEXT" name="assessman" size="45"
-			 value="<%= (prodouctVO==null)? "123" : prodouctVO.getPro_all_assessman()%>" /></td>
+			 value="<%= (proVO==null)? "123" : proVO.getPro_all_assessman()%>" /></td>
 	</tr>
 	
 	

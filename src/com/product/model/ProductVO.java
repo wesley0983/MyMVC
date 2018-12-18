@@ -1,11 +1,11 @@
 package com.product.model;
 import java.sql.Date;
 
-public class ProdouctVO implements java.io.Serializable{
+public class ProductVO implements java.io.Serializable{
 	private String pro_no;
 	private String pro_classid;
 	private String pro_name;
-	private byte[]   pro_pic;
+	private byte[] pro_pic;
 	private String pro_pic_ext;
 	private String pro_format;
 	private Integer pro_bonus;
