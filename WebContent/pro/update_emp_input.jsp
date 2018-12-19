@@ -50,7 +50,7 @@
 	   height: auto;
   }
   .imgsize {
-   width: 301px;
+   width: 300px;
    height: auto;
   }
   
