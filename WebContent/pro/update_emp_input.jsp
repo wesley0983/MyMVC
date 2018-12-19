@@ -49,6 +49,12 @@
 	   width: 300px;
 	   height: auto;
   }
+  .imgsize {
+   width: 301px;
+   height: auto;
+  }
+  
+  
 </style>
 
 </head>
@@ -104,7 +110,11 @@
 		<td>商品圖片:</td>		
 		<td><input type="file" name="pro_pic" id="file01"><br/></td>
 	</tr>
-	<tr>
+	<tr id="preset">
+		<td>商品圖片預覽:</td>
+		<td><img class="imgsize" src="<%=request.getContextPath()%>/pro/proImg.do?pro_no=<%= proVO.getPro_no()%>">   </td>
+	</tr>
+	<tr id="display">
 		<td>商品圖片預覽:</td>
 		<td><img id="pre01">   </td>
 	</tr>
@@ -166,9 +176,12 @@
 <script src="https://code.jquery.com/jquery.js"></script>	
 	
 <script type="text/javascript"> 
+		document.getElementById("display").style.display = 'none';
 	    $(function() {  //將圖片預覽
 	    	$('input[type=file]').change(function() {
 	      	var input = $(this);
+	      	document.getElementById("preset").style.display = 'none';
+	      	document.getElementById("display").style.display = 'block';
 	      	if(!!this.files && !!this.files[0]) {
 	        	var reader = new FileReader();
 	          reader.onload = function(e) {
