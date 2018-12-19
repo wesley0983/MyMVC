@@ -4,7 +4,7 @@
 
 
 <%
-ProductVO proVO = (ProductVO) request.getAttribute("empVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
+	ProductVO proVO = (ProductVO) request.getAttribute("empVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
 %>
 
 
@@ -45,6 +45,10 @@ ProductVO proVO = (ProductVO) request.getAttribute("empVO"); //EmpServlet.java (
   th, td {
     padding: 1px;
   }
+   #pre01 {
+	   width: 300px;
+	   height: auto;
+  }
 </style>
 
 </head>
@@ -69,41 +73,42 @@ ProductVO proVO = (ProductVO) request.getAttribute("empVO"); //EmpServlet.java (
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="pro.do" name="form1">
+<FORM METHOD="post" ACTION="pro.do" name="form1" enctype="multipart/form-data">
 <table>
 <tr>
 
-<!-- 	<tr> -->
-<!-- 		<td>商品編號:<font color=red><b>*</b></font></td> -->
-<%-- 		<td><%= proVO.getPro_no()%></td> --%>
-<!-- 	</tr> -->
 
 	<tr>
 		<td>商品編號:<font color=red><b>*</b></font></td>
 		<td><%=proVO.getPro_no()%></td>
 	</tr>
-
-<!-- <td>商品編號:</td> -->
-<!--   <td><input type="TEXT" name="pro_no" size="45"  -->
-<%--      value="<%= proVO.getPro_no()%>" /></td> --%>
-<!-- </tr> -->
-
+	
 	<jsp:useBean id="productClassSvc" scope="page" class="com.productclass.model.ProductClassService" />
 	<tr>
 		<td>商品類別編號:<font color=red><b>*</b></font></td>
-		<td><select size="1" name="deptno">
+		<td><select size="1" name="pro_classid">
 			<c:forEach var="productClassVO" items="${productClassSvc.all}">
 				<option value="${productClassVO.pro_classid}" ${(productClassVO.pro_classid==productClassVO.pro_classid)?'selected':'' } >${productClassVO.pro_classname}
 			</c:forEach>
 		</select></td>
 	</tr>
 
-
 <tr>
   <td>商品名稱:</td>
   <td><input type="TEXT" name="ename" size="45" 
      value="<%= proVO.getPro_name()%>" /></td>
 </tr>
+<!--    ***************************************************** 	 -->
+
+	<tr>
+		<td>商品圖片:</td>		
+		<td><input type="file" name="pro_pic" id="file01"><br/></td>
+	</tr>
+	<tr>
+		<td>商品圖片預覽:</td>
+		<td><img id="pre01">   </td>
+	</tr>
+<!--    ***************************************************** 	 -->
 
 <tr>
   <td>照片副檔名:</td>
@@ -155,10 +160,29 @@ ProductVO proVO = (ProductVO) request.getAttribute("empVO"); //EmpServlet.java (
 
 </table>
 <br>
-
 	<input type="hidden" name="action" value="update">
 	<input type="hidden" name="pro_no" value="<%=proVO.getPro_no()%>">
 	<input type="submit" value="送出修改"></FORM>
+<script src="https://code.jquery.com/jquery.js"></script>	
+	
+<script type="text/javascript"> 
+	    $(function() {  //將圖片預覽
+	    	$('input[type=file]').change(function() {
+	      	var input = $(this);
+	      	if(!!this.files && !!this.files[0]) {
+	        	var reader = new FileReader();
+	          reader.onload = function(e) {
+	          	$('#pre' + input.prop('id').substr(4,2)).prop('src', e.target.result);
+	          }
+	          reader.readAsDataURL(this.files[0]);
+	        }
+	      });
+	    });
+//******************************************
+    
+	    
+</script>
+
 </body>
 
 

@@ -5,6 +5,7 @@
 
 <%
 	ProductVO proVO = (ProductVO) request.getAttribute("empVO"); //EmpServlet.java(Concroller), 存入req的empVO物件
+	pageContext.setAttribute("list",proVO);
 %>
 
 <html>
@@ -42,6 +43,10 @@
     padding: 5px;
     text-align: center;
   }
+    .imgsize {
+   width: 300px;
+   height: auto;
+  }
 </style>
 
 </head>
@@ -72,11 +77,14 @@
 		<td>商品評價總人數</td>
 	
 	</tr>
+	${list.pro_no}
 	<tr>
 	     <td><%=proVO.getPro_no()%></td>
 		 <td><%=proVO.getPro_classid()%></td>
 		 <td><%=proVO.getPro_name()%></td>
-		 <td><%=proVO.getPro_pic()%></td>
+		 
+		 <td><img class="imgsize" src="<%=request.getContextPath()%>/pro/proImg.do?pro_no=<%= proVO.getPro_no() %>">
+		 
 		 <td><%=proVO.getPro_pic_ext()%></td>
 		 <td><%=proVO.getPro_format()%></td>
 		 <td><%=proVO.getPro_bonus()%></td>

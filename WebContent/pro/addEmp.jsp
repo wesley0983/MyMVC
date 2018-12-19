@@ -13,6 +13,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+
 <title>員工資料新增 - addEmp.jsp</title>
 
 <style>
@@ -45,6 +46,10 @@
   th, td {
     padding: 1px;
   }
+  #pre01 {
+   width: 300px;
+   height: auto;
+  }
 </style>
 
 </head>
@@ -69,7 +74,7 @@
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="pro.do" name="form1">
+ <FORM METHOD="post" ACTION="pro.do" name="form1" enctype="multipart/form-data">
 <table>
     <tr>
 		<td>商品類別編號(需要拉選單):</td>
@@ -81,6 +86,17 @@
 		<td><input type="TEXT" name="ename" size="45" 
 			 value="<%= (proVO==null)? "吳永志" : proVO.getPro_name()%>" /></td>
 	</tr>
+<!--    ***************************************************** 	 -->
+
+	<tr>
+		<td>商品圖片:</td>		
+		<td><input type="file" name="pro_pic" id="file01"><br/></td>
+	</tr>
+	<tr>
+		<td>商品圖片預覽:</td>
+		<td><img id="pre01">   </td>
+	</tr>
+<!--    ***************************************************** 	 -->	
 	
 	<tr>
 		<td>照片副檔名:</td>
@@ -144,11 +160,50 @@
 <br>
 <input type="hidden" name="action" value="insert">
 <input type="submit" value="送出新增"></FORM>
+<script src="https://code.jquery.com/jquery.js"></script>
+
+<script>
+
+</script>
+
+<script type="text/javascript"> 
+	    $(function() {  //將圖片預覽
+	    	$('input[type=file]').change(function() {
+	      	var input = $(this);
+	      	if(!!this.files && !!this.files[0]) {
+	        	var reader = new FileReader();
+	          reader.onload = function(e) {
+	          	$('#pre' + input.prop('id').substr(4,2)).prop('src', e.target.result);
+	          }
+	          reader.readAsDataURL(this.files[0]);
+	        }
+	      });
+	    });
+// 	    function uploadImage(){
+// 	        $.ajax({
+// 	            type:'POST',
+// 	            url: 'ajax/uploadimage', 
+// 	            data: {image: image},
+// 	            async: false,
+// 	            dataType: 'json',
+// 	            success: function(data){
+// 	                if(data.success){
+// 	                    alert('上傳成功');
+// 	                    }else{
+// 	                    alert('上船失敗');
+// 	                    }
+// 	            },
+// 	            error: function(err){
+// 	                alert('網路故障');
+// 	            }
+// 	        });
+// 	     }	
+//******************************************
+    
+	    
+</script>
+
+
 </body>
-
-
-
-
-
 
 </html>

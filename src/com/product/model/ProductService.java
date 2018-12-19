@@ -38,7 +38,7 @@ public class ProductService {
 		return proVO;
 	}
 	
-	public ProductVO updatePro (String pro_no,String pro_classid ,String pro_name ,byte[]   pro_pic ,
+	public ProductVO updatePro (String pro_no,String pro_classid ,String pro_name ,byte[] pro_pic ,
 			String pro_pic_ext ,String pro_format ,Integer pro_bonus ,
 			Integer pro_stock ,Integer pro_safestock ,String pro_details ,
 			String pro_shelve ,Integer pro_all_assess ,Integer pro_all_assessman ) {

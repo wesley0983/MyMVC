@@ -4,7 +4,9 @@ import java.io.*;
 import java.util.*;
 
 import javax.servlet.*;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
+
 
 
 import com.product.model.ProductService;
@@ -12,6 +14,9 @@ import com.product.model.ProductVO;
 import com.productclass.model.ProductClassService;
 import com.productclass.model.ProductClassVO;
 
+import sun.misc.IOUtils;
+
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5  * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class ProServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
@@ -99,7 +104,7 @@ if ("getOne_For_Update".equals(action)) { // 來自listAllEmp.jsp的請求
 			try {
 				/***************************1.接收請求參數****************************************/
 				String pro_no = req.getParameter("pro_no");
-				System.out.println("update_pro_no :"  + pro_no);
+				
 				/***************************2.開始查詢資料****************************************/
 
 				ProductService proSvc = new ProductService();
@@ -128,14 +133,19 @@ if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
+			System.out.println("有近來");
 		    
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-
+				//解析網頁送來的圖片
+				Part part = req.getPart("pro_pic");			
+				InputStream in = part.getInputStream();	
+				byte[] pro_pic = ProServlet.Photo(in);
+				
+				
 				String pro_no = req.getParameter("pro_no");
 				String pro_classid = req.getParameter("pro_classid");
 				String pro_name = req.getParameter("ename");
-				byte[] pro_pic = null;//*注意*
 				String pro_pic_ext = req.getParameter("pic_ext");
 				String pro_format = req.getParameter("format");
 				Integer pro_bonus = new Integer(req.getParameter("bonus").trim());
@@ -146,11 +156,27 @@ if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
 				Integer pro_all_assess = new Integer(req.getParameter("assess").trim());
 				Integer pro_all_assessman = new Integer(req.getParameter("assessman").trim());
 				
+				
+				System.out.println("pro_no :" + pro_no);
+				System.out.println("pro_no :" + pro_classid);
+				System.out.println("pro_no :" + pro_name);
+				System.out.println("pro_no :" + pro_pic_ext);
+				System.out.println("pro_no :" + pro_format);
+				System.out.println("pro_no :" + pro_bonus);
+				System.out.println("pro_no :" + pro_stock);
+				System.out.println("pro_no :" + pro_safestock);
+				System.out.println("pro_no :" + pro_shelve);
+				System.out.println("pro_no :" + pro_all_assess);
+				System.out.println("pro_no :" + pro_all_assessman);
+				
+				
+				
+				
 				ProductVO proVO = new ProductVO();
 				proVO.setPro_no(pro_no);
 				proVO.setPro_classid(pro_classid);
 		        proVO.setPro_name(pro_name);
-		        proVO.setPro_pic(null);//圖片給空 *注意*
+		        proVO.setPro_pic(pro_pic);//圖片給空 *注意*
 		        proVO.setPro_pic_ext(pro_pic_ext);
 		        proVO.setPro_format(pro_format);
 		        proVO.setPro_bonus(pro_bonus);
@@ -173,7 +199,9 @@ if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
 				/***************************2.開始修改資料*****************************************/
 
 				ProductService proSvc = new ProductService();
-				ProductVO prodVO = proSvc.updatePro(pro_no, pro_classid, pro_name, pro_pic, pro_pic_ext, pro_format, pro_bonus, pro_stock, pro_safestock, pro_details, pro_shelve, pro_all_assess, pro_all_assessman);
+				ProductVO prodVO = proSvc.updatePro(pro_no, pro_classid, pro_name, pro_pic, pro_pic_ext,
+						pro_format, pro_bonus, pro_stock, pro_safestock, pro_details, pro_shelve,
+						pro_all_assess, pro_all_assessman);
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("empVO", proVO); // ��Ʈwupdate���\��,���T����empVO����,�s�Jreq
@@ -199,11 +227,14 @@ if ("insert".equals(action)) { //來自addEmp.jsp的請求
 
 			try {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
-				
-												
+				//解析網頁送來的圖片
+				Part part = req.getPart("pro_pic");			
+				InputStream in = part.getInputStream();	
+				byte[] pro_pic = ProServlet.Photo(in);
+				//拿取網頁資料
 				String pro_classid = req.getParameter("pro_classid");
 				String ename = req.getParameter("ename");
-				//圖片給空
+				
 				String pic_ext = req.getParameter("pic_ext");
 				String format = req.getParameter("format");
 				Integer bonus = new Integer(req.getParameter("bonus").trim());
@@ -217,7 +248,7 @@ if ("insert".equals(action)) { //來自addEmp.jsp的請求
 				ProductVO proVO = new ProductVO();
 				proVO.setPro_classid(pro_classid);
 		        proVO.setPro_name(ename);
-		        proVO.setPro_pic(null);//圖片給空
+		        proVO.setPro_pic(pro_pic);//圖片給空
 		        proVO.setPro_pic_ext(pic_ext);
 		        proVO.setPro_format(format);
 		        proVO.setPro_bonus(bonus);
@@ -241,7 +272,7 @@ if ("insert".equals(action)) { //來自addEmp.jsp的請求
 				
 				/***************************2.開始新增資料***************************************/
 				ProductService proSvc = new ProductService();
-				proVO = proSvc.addPro(pro_classid,ename,null,pic_ext,format,bonus,stock,safestock,details,shelve,assess,assessman);
+				proVO = proSvc.addPro(pro_classid,ename,pro_pic,pic_ext,format,bonus,stock,safestock,details,shelve,assess,assessman);
 				
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
@@ -289,4 +320,21 @@ if ("delete".equals(action)) { // �Ӧ�listAllEmp.jsp
 			}
 		}
 	}
+
+    public static byte[] Photo (InputStream in) {  //將inputStream to byte[]
+    	   
+        byte[] buff = new byte[8000];
+        int bytesRead = 0;
+        ByteArrayOutputStream bao = new ByteArrayOutputStream();
+        try {
+			while((bytesRead = in.read(buff)) != -1) {
+			   bao.write(buff, 0, bytesRead);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        byte[] data = bao.toByteArray();
+		
+    	return data;
+    }
 }

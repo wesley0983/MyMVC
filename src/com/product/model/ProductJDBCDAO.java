@@ -109,19 +109,6 @@ public class ProductJDBCDAO implements ProductDAO_interface{
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 		    ps = con.prepareStatement(UPDATE);
 		    
-	    	System.out.println("getPro_classid" + proVO.getPro_classid());
-	        System.out.println("getPro_name" + proVO.getPro_name());
-	        System.out.println("getPro_pic" + proVO.getPro_pic());
-	        System.out.println("getPro_pic_ext" + proVO.getPro_pic_ext());
-	        System.out.println("getPro_format" + proVO.getPro_format());
-            System.out.println("getPro_bonus" + proVO.getPro_bonus());
-            System.out.println("getPro_stock" + proVO.getPro_stock());
-            System.out.println("getPro_safestock" + proVO.getPro_safestock());
-	    	System.out.println("getPro_details" + proVO.getPro_details());
-	    	System.out.println("getPro_shelve" + proVO.getPro_shelve());
-	        System.out.println("getPro_all_assess" + proVO.getPro_all_assess());
-	        System.out.println("getPro_all_assessman" + proVO.getPro_all_assessman());
-	        System.out.println("getgetPro_no" + proVO.getPro_no());
 		    
 		    ps.setString(1,proVO.getPro_classid());
 	        ps.setString(2, proVO.getPro_name());
