@@ -1,5 +1,6 @@
 package com.product.model;
 
+import java.io.*;
 import java.util.List;
 
 public class Product_Main {
@@ -7,7 +8,24 @@ public class Product_Main {
 	public static void main (String[]  args) {
 		
 		ProductJDBCDAO proDAO = new ProductJDBCDAO();
+		
+		String inpath = "C:\\Users\\kevin_000\\School_project\\Project\\img";
 
+		File file = new File(inpath);
+		FileInputStream fis;
+		try {
+			
+			fis = new FileInputStream(file);
+			InputStreamReader isr = new InputStreamReader(fis);
+			BufferedReader br = new BufferedReader(isr);
+			
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		//新增
 		ProductVO proVO1 = new ProductVO();
         proVO1.setPro_classid("PT001");

@@ -23,4 +23,14 @@
 		<servlet-name>ProServlet</servlet-name>
 		<url-pattern>/pro/pro.do</url-pattern>
 	</servlet-mapping>
+	
+  <servlet>
+		<servlet-name>ProductImgServlet</servlet-name>
+		<servlet-class>com.pro.controller.ProductImgServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ProductImgServlet</servlet-name>
+		<url-pattern>/pro/proImg.do</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

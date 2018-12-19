@@ -95,6 +95,9 @@
 			<td>${proVO.pro_classid}</td>
 			<td>${proVO.pro_name}</td>
 			<td>${proVO.pro_pic}</td>
+			
+			<td><img src="<%=request.getContextPath()%>/pro/proImg.do?pro_no=${proVO.pro_no}">
+			
 			<td>${proVO.pro_pic_ext}</td>
 			<td>${proVO.pro_format}</td>
 			<td>${proVO.pro_bonus}</td>
