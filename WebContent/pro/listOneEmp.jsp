@@ -4,7 +4,7 @@
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
-	ProductVO proVO = (ProductVO) request.getAttribute("empVO"); //EmpServlet.java(Concroller), 存入req的empVO物件
+	ProductVO proVO = (ProductVO) request.getAttribute("proVO"); //EmpServlet.java(Concroller), 存入req的empVO物件
 	pageContext.setAttribute("list",proVO);
 %>
 

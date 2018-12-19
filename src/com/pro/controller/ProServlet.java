@@ -78,7 +78,7 @@ if ("getOne_For_Display".equals(action)) { //來自select_page.jsp的請求
 				}
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
-				req.setAttribute("empVO", proVO); // 資料庫取出的empVO物件,存入req
+				req.setAttribute("proVO", proVO); // 資料庫取出的proVO物件,存入req
 				String url = "/pro/listOneEmp.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // ���\��� listOneEmp.jsp
 				successView.forward(req, res);
@@ -112,7 +112,7 @@ if ("getOne_For_Update".equals(action)) { // 來自listAllEmp.jsp的請求
 				
 								
 				/***************************3查詢完成,準備轉交(Send the Success view)************/
-				req.setAttribute("empVO", prodVO);         // 資料庫取出的empVO物件,存入req
+				req.setAttribute("proVO", prodVO);         // 資料庫取出的proVO物件,存入req
 				String url = "/pro/update_emp_input.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
 				successView.forward(req, res);
@@ -212,7 +212,7 @@ if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
 				
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("empVO", proVO); // 含有輸入格式錯誤的empVO物件,也存入req
+					req.setAttribute("proVO", proVO); // 含有輸入格式錯誤的proVO物件,也存入req
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/pro/update_emp_input.jsp");
 					failureView.forward(req, res);
@@ -227,7 +227,7 @@ if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
 						pro_all_assess, pro_all_assessman);
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
-				req.setAttribute("empVO", proVO); // ��Ʈwupdate���\��,���T����empVO����,�s�Jreq
+				req.setAttribute("proVO", proVO); // ��Ʈwupdate���\��,���T����proVO����,�s�Jreq
 				String url = "/pro/listOneEmp.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // �ק令�\��,���listOneEmp.jsp
 				successView.forward(req, res);
@@ -321,7 +321,7 @@ if ("insert".equals(action)) { //來自addEmp.jsp的請求
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("empVO", proVO); // 含有輸入格式錯誤的empVO物件,也存入req
+					req.setAttribute("proVO", proVO); // 含有輸入格式錯誤的proVO物件,也存入req
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/pro/addEmp.jsp");
 					failureView.forward(req, res);

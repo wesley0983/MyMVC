@@ -4,7 +4,7 @@
 
 
 <%
-	ProductVO proVO = (ProductVO) request.getAttribute("empVO");
+	ProductVO proVO = (ProductVO) request.getAttribute("proVO");
 %>
 
 <%= proVO == null %>
