@@ -152,16 +152,24 @@ if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
 				}
 			
 				String pro_pic_ext = req.getParameter("pic_ext");//不需要
-					
+				if (pro_pic_ext == null || pro_pic_ext.trim().length() == 0) {
+					errorMsgs.add("副檔名請勿空白");
+				}	
 				String pro_format = req.getParameter("format");
 				if (pro_format == null || pro_format.trim().length() == 0) {
 					errorMsgs.add("商品規格請勿空白");
 				}
-				
+
 				Integer pro_bonus = new Integer(req.getParameter("bonus").trim());
 				if (pro_bonus == null || pro_bonus == 0) {
 					errorMsgs.add("商品單價請勿空白");
 				}
+//				try {
+//					pro_bonus = new Integer(req.getParameter("bonus").trim());
+//				} catch (Exception e) {
+//					errorMsgs.add("商品單價請勿空白");
+//					e.printStackTrace();
+//				}
 				
 				Integer pro_stock = new Integer(req.getParameter("stock").trim());
 				if (pro_stock == null || pro_stock == 0) {
@@ -235,10 +243,11 @@ if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
 				/***************************其他可能的錯誤處理*************************************/
 			} catch (Exception e) {
 				errorMsgs.add("修改資料失敗:"+e.getMessage());
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/pro/update_emp_input.jsp");
+				System.out.println(errorMsgs);
+				RequestDispatcher failureView = req.getRequestDispatcher("/pro/update_emp_input.jsp");
 				failureView.forward(req, res);
 			}
+				
 		}
 
 if ("insert".equals(action)) { //來自addEmp.jsp的請求
@@ -269,7 +278,9 @@ if ("insert".equals(action)) { //來自addEmp.jsp的請求
 					errorMsgs.add("名稱請勿空白");
 				}
 				String pic_ext = req.getParameter("pic_ext");
-				
+				if (pic_ext == null || pic_ext.trim().length() == 0) {
+					errorMsgs.add("副檔名請勿空白");
+				}
 				String pro_format = req.getParameter("format");
 				if (pro_format == null || pro_format.trim().length() == 0) {
 					errorMsgs.add("商品規格請勿空白");
@@ -282,7 +293,7 @@ if ("insert".equals(action)) { //來自addEmp.jsp的請求
 				if (pro_stock == null || pro_stock == 0) {
 					errorMsgs.add("商品庫存請勿空白");
 				}
-				Integer pro_safestock = new Integer(req.getParameter("stock").trim());
+				Integer pro_safestock = new Integer(req.getParameter("safestock").trim());
 				if (pro_safestock == null || pro_safestock == 0) {
 					errorMsgs.add("商品安全庫存請勿空白");
 				}

@@ -75,12 +75,17 @@
 </c:if>
 
  <FORM METHOD="post" ACTION="pro.do" name="form1" enctype="multipart/form-data">
+ <jsp:useBean id="productClassSvc" scope="page" class="com.productclass.model.ProductClassService" />
 <table>
     <tr>
 		<td>商品類別編號(需要拉選單):</td>
-		<td><input type="TEXT" name="pro_classid" size="45" 
-			 value="<%= (proVO==null)? "PT001" : proVO.getPro_classid()%>" /></td>
+		<td><select size="1" name="pro_classid">
+			<c:forEach var="productClassVO" items="${productClassSvc.all}">
+				<option value="${productClassVO.pro_classid}" ${(productClassVO.pro_classid==productClassVO.pro_classid)?'selected':'' } >${productClassVO.pro_classname}
+			</c:forEach>
+		</select></td>
 	</tr>
+	
     <tr>
 		<td>商品名稱:</td>
 		<td><input type="TEXT" name="ename" size="45" 
