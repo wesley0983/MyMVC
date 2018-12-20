@@ -11,7 +11,7 @@
     	session.setAttribute("proVO", proVO);
     }
 %>
-
+<%= proVO == null %>
 
 
 

@@ -141,6 +141,8 @@ if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
 				String pro_classid = req.getParameter("pro_classid");				
 				String pro_name = req.getParameter("ename").trim();
 				if (pro_name == null || pro_name.trim().length() == 0) {
+					ProductService proSvc  = new ProductService();
+					pro_name = proSvc.getOneProduct(pro_no).getPro_name();
 					errorMsgs.add("名稱請勿空白");
 				}	
 				//解析網頁送來的圖片
@@ -148,56 +150,72 @@ if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
 				InputStream in = part.getInputStream();	
 				byte[] pro_pic = ProServlet.Photo(in);
 				if (pro_pic == null || pro_pic.length == 0) {
-					errorMsgs.add("請上傳圖片");
+					ProductService proSvc  = new ProductService();
+					pro_pic = proSvc.getOneProduct(pro_no).getPro_pic();					
 				}
 			
 				String pro_pic_ext = req.getParameter("pic_ext");//不需要
 				if (pro_pic_ext == null || pro_pic_ext.trim().length() == 0) {
+					ProductService proSvc  = new ProductService();
+					pro_pic_ext = proSvc.getOneProduct(pro_no).getPro_pic_ext();
 					errorMsgs.add("副檔名請勿空白");
 				}	
 				String pro_format = req.getParameter("format");
 				if (pro_format == null || pro_format.trim().length() == 0) {
+					ProductService proSvc  = new ProductService();
+					pro_format = proSvc.getOneProduct(pro_no).getPro_format();
 					errorMsgs.add("商品規格請勿空白");
 				}
 
 				Integer pro_bonus = new Integer(req.getParameter("bonus").trim());
 				if (pro_bonus == null || pro_bonus == 0) {
+					ProductService proSvc  = new ProductService();
+					pro_bonus = proSvc.getOneProduct(pro_no).getPro_bonus();
 					errorMsgs.add("商品單價請勿空白");
 				}
-//				try {
-//					pro_bonus = new Integer(req.getParameter("bonus").trim());
-//				} catch (Exception e) {
-//					errorMsgs.add("商品單價請勿空白");
-//					e.printStackTrace();
-//				}
 				
-				Integer pro_stock = new Integer(req.getParameter("stock").trim());
-				if (pro_stock == null || pro_stock == 0) {
+				Integer pro_stock = null;
+				try {
+					pro_stock = new Integer(req.getParameter("stock").trim());
+				} catch (Exception e) {
+					ProductService proSvc  = new ProductService();
+					pro_stock = proSvc.getOneProduct(pro_no).getPro_stock();
 					errorMsgs.add("商品庫存請勿空白");
 				}
 				
-				Integer pro_safestock = new Integer(req.getParameter("stock").trim());
+				
+				Integer pro_safestock = new Integer(req.getParameter("safestock").trim());
 				if (pro_safestock == null || pro_safestock == 0) {
+					ProductService proSvc  = new ProductService();
+					pro_safestock = proSvc.getOneProduct(pro_no).getPro_safestock();
 					errorMsgs.add("商品安全庫存請勿空白");
 				}
 				
 				String pro_details = req.getParameter("details");
 				if (pro_details == null || pro_details.trim().length() == 0) {
+					ProductService proSvc  = new ProductService();
+					pro_details = proSvc.getOneProduct(pro_no).getPro_details();
 					errorMsgs.add("商品詳述請勿空白");
 				}
 				
 				String pro_shelve = req.getParameter("shelve");
-				if (pro_details == null || pro_details.trim().length() == 0) {
+				if (pro_shelve == null || pro_shelve.trim().length() == 0) {
+					ProductService proSvc  = new ProductService();
+					pro_shelve = proSvc.getOneProduct(pro_no).getPro_shelve();
 					errorMsgs.add("商品狀態請勿空白");
 				}
 				
 				Integer pro_all_assess = new Integer(req.getParameter("assess").trim());
 				if (pro_all_assess == null || pro_all_assess == 0) {
+					ProductService proSvc  = new ProductService();
+					pro_all_assess = proSvc.getOneProduct(pro_no).getPro_all_assess();
 					errorMsgs.add("商品總評價請勿空白");
 				}
 				
 				Integer pro_all_assessman = new Integer(req.getParameter("assessman").trim());
-				if (pro_all_assess == null || pro_all_assess == 0) {
+				if (pro_all_assessman == null || pro_all_assessman == 0) {
+					ProductService proSvc  = new ProductService();
+					pro_all_assessman = proSvc.getOneProduct(pro_no).getPro_all_assessman();
 					errorMsgs.add("商品評價總人數請勿空白");
 				}
 				
