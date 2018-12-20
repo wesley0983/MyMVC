@@ -12,9 +12,16 @@
 %>
 
 
-<html>
+<!DOCTYPE html>
+<html lang="">
 <head>
-<title>所有員工資料 - listAllEmp.jsp</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"> 
+	<title>所有員工資料 - listAllEmp.jsp</title>
 
 <style>
   table#table-1 {
@@ -77,7 +84,7 @@
 <table>
 	<tr>
 	    <th>商品編號:</th>
-		<th>商品類別編號(需要拉選單):</th>
+		<th>商品類別名稱:</th>
 		<th>商品名稱:</th>
 		<th>照片:</th>
 		<th>照片副檔名:</th>
@@ -92,15 +99,17 @@
 		
 	</tr>
 	<%@ include file="page1.file" %> 
-	<c:forEach var="proVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-		
+	<jsp:useBean id="productClassSvc" scope="page" class="com.productclass.model.ProductClassService" />
+	<c:forEach var="proVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">	
 		<tr>
 		    <td>${proVO.pro_no}</td>
-			<td>${proVO.pro_classid}</td>
+			<td>
+				<c:forEach var="productClassVO" items="${productClassSvc.all}">
+				    ${(proVO.pro_classid == productClassVO.pro_classid)?productClassVO.pro_classname:''}
+				</c:forEach>
+			</td>
 			<td>${proVO.pro_name}</td>
-			
 			<td><img class="imgsize" src="<%=request.getContextPath()%>/pro/proImg.do?pro_no=${proVO.pro_no}">
-			
 			<td>${proVO.pro_pic_ext}</td>
 			<td>${proVO.pro_format}</td>
 			<td>${proVO.pro_bonus}</td>
@@ -114,7 +123,8 @@
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/pro/pro.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">
 			     <input type="hidden" name="pro_no"  value="${proVO.pro_no}">
-			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
+			     <input type="hidden" name="action"	value="getOne_For_Update">
+			   </FORM>
 			</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/pro/pro.do" style="margin-bottom: 0px;">
@@ -126,6 +136,7 @@
 	</c:forEach>
 </table>
 <%@ include file="page2.file" %>
-
+	<script src="https://code.jquery.com/jquery.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
