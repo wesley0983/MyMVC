@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.*;
 
+import javax.jws.WebService;
 import javax.servlet.http.*;
 
 public class HelloGet extends HttpServlet{
@@ -20,9 +21,9 @@ public class HelloGet extends HttpServlet{
 //        System.out.println(name.trim().isEmpty());
 //        System.out.println(name.trim().equals(""));
 //        res.sendError(500);
-//        res.sendError(res.SC_NOT_FOUND, "請勾選checkbox");
+//        res.sendError(res.SC_NOT_FOUND, "嚙請勾選蕭checkbox");
 		if(name == null) {
-		     out.println("<h1>請勾選checkbox</h1>");	
+		     out.println("<h1>嚙請勾選蕭checkbox</h1>");	
 		} else {
 		    for(int i = 0 ; i < name.length ; i ++) {		 
 				 out.println("<html>");
@@ -33,7 +34,7 @@ public class HelloGet extends HttpServlet{
 		}
 		
 //		if(name == null) {
-//			out.print("<h1>請勾選checkbox</h1>");
+//			out.print("<h1>嚙請勾選蕭checkbox</h1>");
 //		} else {
 //	        out.println("<html>");
 //	        out.println("<h1>"+ name +"<h1>");

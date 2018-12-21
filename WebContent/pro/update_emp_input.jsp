@@ -5,11 +5,7 @@
 
 <%
 	ProductVO proVO = (ProductVO) request.getAttribute("proVO"); //EmpServlet.java (Concroller) 存入req的proVO物件 (包括幫忙取出的proVO, 也包括輸入資料錯誤時的proVO物件)
-    if(proVO == null){
-    	
-    } else {
-    	session.setAttribute("proVO", proVO);
-    }
+    
 %>
 <%= proVO == null %>
 
@@ -137,37 +133,37 @@
 </tr>
 <tr>
   <td>商品單價:</td>
-  <td><input type="TEXT" name="bonus" size="45"
+  <td><input type="TEXT" name="pro_bonus" size="45"
      value="<%= proVO.getPro_bonus()%>" /></td>
 </tr>
 <tr>
   <td>商品庫存量:</td>
-  <td><input type="TEXT" name="stock" size="45"
+  <td><input type="TEXT" name="pro_stock" size="45"
      value="<%= proVO.getPro_stock()%>" /></td>
 </tr>
 <tr>
   <td>商品安全庫存量:</td>
-  <td><input type="TEXT" name="safestock" size="45"
+  <td><input type="TEXT" name="pro_safestock" size="45"
      value="<%= proVO.getPro_safestock()%>" /></td>
 </tr>
 <tr>
   <td>商品詳述:</td>
-  <td><input type="TEXT" name="details" size="45"
+  <td><input type="TEXT" name="pro_details" size="45"
      value="<%=  proVO.getPro_details()%>" /></td>
 </tr>
 <tr>
   <td>商品狀態:</td>
-  <td><input type="TEXT" name="shelve" size="45"
+  <td><input type="TEXT" name="pro_shelve" size="45"
      value="<%=  proVO.getPro_shelve()%>" /></td>
 </tr>
 <tr>
   <td>商品總評價:</td>
-  <td><input type="TEXT" name="assess" size="45"
+  <td><input type="TEXT" name="pro_all_assess" size="45"
      value="<%= proVO.getPro_all_assess()%>" /></td>
 </tr>
 <tr>
   <td>商品評價總人數:</td>
-  <td><input type="TEXT" name="assessman" size="45"
+  <td><input type="TEXT" name="pro_all_assessman" size="45"
      value="<%= proVO.getPro_all_assessman()%>" /></td>
 </tr>
 

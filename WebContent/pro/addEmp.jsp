@@ -99,7 +99,7 @@
 	</tr>
 	<tr>
 		<td>商品圖片預覽:</td>
-		<td><img id="pre01">   </td>
+		<td><img id="pre01" src="images/tomcat.png">   </td>
 	</tr>
 <!--    ***************************************************** 	 -->	
 	
@@ -115,17 +115,17 @@
 	</tr>
 	<tr>
 		<td>商品單價:</td>
-		<td><input type="TEXT" name="bonus" size="45"
+		<td><input type="TEXT" name="pro_bonus" size="45"
 			 value="<%= (proVO==null)? "123" : proVO.getPro_bonus()%>" /></td>
 	</tr>
 	<tr>
 		<td>商品庫存量:</td>
-		<td><input type="TEXT" name="stock" size="45"
+		<td><input type="TEXT" name="pro_stock" size="45"
 			 value="<%= (proVO==null)? "123" : proVO.getPro_stock()%>" /></td>
 	</tr>
 	<tr>
 		<td>商品安全庫存量:</td>
-		<td><input type="TEXT" name="safestock" size="45"
+		<td><input type="TEXT" name="pro_safestock" size="45"
 			 value="<%= (proVO==null)? "123" : proVO.getPro_safestock()%>" /></td>
 	</tr>
 	<tr>
@@ -140,12 +140,12 @@
 	</tr>
 	<tr>
 		<td>商品總評價:</td>
-		<td><input type="TEXT" name="assess" size="45"
+		<td><input type="TEXT" name="pro_all_assess" size="45"
 			 value="<%= (proVO==null)? "123" : proVO.getPro_all_assess()%>" /></td>
 	</tr>
 	<tr>
 		<td>商品評價總人數:</td>
-		<td><input type="TEXT" name="assessman" size="45"
+		<td><input type="TEXT" name="pro_all_assessman" size="45"
 			 value="<%= (proVO==null)? "123" : proVO.getPro_all_assessman()%>" /></td>
 	</tr>
 	
