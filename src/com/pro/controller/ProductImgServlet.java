@@ -15,16 +15,21 @@ public class ProductImgServlet extends HttpServlet{
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		
-	    req.setCharacterEncoding("UTF-8");
-	    String pro_no = req.getParameter("pro_no");
-	    ProductService  proSvc = new ProductService();
-	    byte[] pic = proSvc.getOneProduct(pro_no).getPro_pic();
-	
-	   ServletOutputStream out = res.getOutputStream();
-	   res.setContentLength(pic.length);
-	   res.setContentType("image/*");
-	   out.write(pic);
-	   out.close();
+	    try {
+			req.setCharacterEncoding("UTF-8");
+			String pro_no = req.getParameter("pro_no");
+			ProductService  proSvc = new ProductService();
+			byte[] pic = proSvc.getOneProduct(pro_no).getPro_pic();
+
+		    ServletOutputStream out = res.getOutputStream();
+		    res.setContentLength(pic.length);
+		    res.setContentType("image/*");
+		    out.write(pic);
+		    out.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	
 	}
 }
